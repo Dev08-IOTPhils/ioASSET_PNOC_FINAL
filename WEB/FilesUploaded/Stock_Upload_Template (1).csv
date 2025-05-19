@@ -1,0 +1,3 @@
+ItemCode	Quantity	CustodianType	Region	BatchName
+Required	1. Required 2. Alphabets are not allowed	Required	Required	1. Required 2. Enter the same batch name in each row/property
+test-0001	250	Supplies 	test	B1

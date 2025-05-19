@@ -1,0 +1,2415 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Security-Policy" />
+    <link rel="shortcut icon" href="<%= Page.ResolveClientUrl("~/Image/IOT/favico.ico") %>" />
+    <base href="#" target="_self" />
+    <title>ioASSET</title>
+    <script src="../Scripts/jquery-3.5.1.js"></script>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="StyleSheets/bootstrap.min.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="StyleSheets/font-awesome.min.css" />
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="StyleSheets/ionicons.min.css" />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="StyleSheets/AdminLTE.min.css" />
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+    <%--<link rel="stylesheet" href="AdminLTE-2.4.7/dist/css/skins/_all-skins.min.css" />--%>
+    <link href="StyleSheets/skin-blue-light.min.css" rel="stylesheet" />
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="StyleSheets/morris.css" />
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="StyleSheets/bootstrap-datepicker.min.css" />
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="StyleSheets/date-range-picker.css" />
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="StyleSheets/bootstrap3-wysihtml5.min.css" />
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="StyleSheets/all.css" />
+    <!-- data tables -->
+    <%--<link href="AdminLTE-2.4.7/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet" />--%>
+    <link href="Script/googlebarcode.css" rel="stylesheet" />
+    <%--<link href='https://fonts.googleapis.com/css?family=Libre Barcode 128' rel='stylesheet' />--%>
+    <link href="StyleSheets/buttons.dataTables.min.css" rel="stylesheet" />
+    <link href="StyleSheets/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="StyleSheets/fixedHeader.dataTables.css" rel="stylesheet" />
+    <!-- Select2 -->
+    <link rel="stylesheet" href="StyleSheets/select2.min.css" />
+    <link href="StyleSheets/slider1.css" rel="stylesheet" />
+    <!-- dropzonejs -->
+    <link href="StyleSheets/dropzone.css" rel="stylesheet" />
+    <script src="../Script/mousetrap.min.js"></script>
+    <script>
+        var defaulturl = window.location.origin;
+        $('head base').attr('href', defaulturl);        
+    </script>
+    <style>
+      
+        tfoot input {
+            width: 100%;
+            padding: 0px;
+            /*border-spacing :2px 2px;
+            box-sizing: border-box;*/
+        }
+
+        tfoot {
+            display: table-header-group;
+            border: none;
+        }
+
+        .datepicker{
+            z-index: 9999 !important
+        }
+
+        .NewNotif {
+            background-color: whitesmoke;
+        }
+
+            .NewNotif:hover {
+                background-color: /*#d8f4ff*/ lightgray;
+            }
+
+        .NotifImage {
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        /*table {
+            table-layout: fixed;
+            word-wrap: break-word;
+        }*/
+
+        /*.navbar-nav>.notifications-menu>.dropdown-menu>li .menu, .navbar-nav>.messages-menu>.dropdown-menu>li .menu, .navbar-nav>.tasks-menu>.dropdown-menu>li .menu {
+    max-height: inherit;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-y:hidden;
+}*/
+
+        @media print {
+            html, body {
+                height: auto;
+            }
+
+            .dt-print-table, .dt-print-table thead, .dt-print-table th, .dt-print-table tr {
+                border: 0 none !important;
+            }
+
+            tfoot td {
+                border: none;
+            }
+        }
+
+        .dataTables_scrollHeadInner {
+            width: 100% !important;
+        }
+
+            .dataTables_scrollHeadInner table {
+                width: 100% !important;
+            }
+
+        /*loading animation*/
+        .se-pre-con {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url('/Image/Icon/circle-loading-animation.gif') center no-repeat #fff; /*<img src="Image/AssetISlogo.png" />*/
+        }
+
+        .swal-modal .swal-text {
+            text-align: center;
+        }
+
+        .btn-dict-pref {
+            background-color : #7FB069;
+        }
+    </style>
+    
+    <!-- Google Font -->
+    <link href="Script/googlefonts.css" rel="stylesheet" />
+    <%--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">--%>
+
+    <%--<script src="../AdminLTE-2.4.7/jquery.min.js"></script>--%>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <%-- <script src="../Script/Notification.js"></script>--%>
+    <!-- Change Password Script -->
+    <%-- <script src="../Script/Notification.js"  type="text/javascript"></script>--%> <%--added by nero--%>
+
+    <script src="../Script/ChangePass.js" type="text/javascript"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <%--<script>
+        function callEventUnload(evt) {
+            alert('x');
+        }
+    </script>--%>
+</head>
+<body class="hold-transition skin-blue-light sidebar-mini fixed" onbeforeunload="">
+    <asp:Label ID="hfLicense" runat="server" Style="display: none;" />
+
+    <div class="se-pre-con"></div>
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-med">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: lightsteelblue; text-align: center;">
+                    <%--                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="Clear()">&times;</button>--%>
+                    <h4>
+                        <p>ABOUT US</p>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <center><p>This is developed by INTERNET OF THINGS PHILIPPINES INC.</p>
+                    <img src="Image/ioASSET/ioASSET.png" width="30%" /><br />
+                    Powered by <a href="http://www.iotphils.com"><img src="Image/IOT/iot.png" width="8%" /></a>
+                    </center>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="box">
+                                <div class="box-body">
+                                    <p>This computer program is protected by copyright law and international treaties. Unauthorized reproduction or distribution of this program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under law.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal1" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-med">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: lightsteelblue; text-align: center;">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="Clear()">&times;</button>
+                    <h4>
+                        <p>ABOUT US</p>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <p>This is developed by INTERNET OF THINGS PHILIPPINES INC.</p>
+                    <p>CP #: 09069744050</p>
+                    <p>FB: fb.com/gintoki.mar/</p>
+                    <p>UN: Xadaharu</p>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+    <form id="form1" runat="server" autocomplete="off">
+        <div class="wrapper">
+            <div id="cookieBar" style="z-index: 999;"></div>
+            <header class="main-header">
+                <!-- Logo -->
+                <a class="logo" runat="server" id="NavBarLogo">
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini">
+                        <b>AMIS</b>
+                        <%--<img src="../Image/AssetISlogo.png" style="height: 50px; width: 50px" />--%></span>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg"><b>AIMS</b><%--<img src="../Image/ioASSET/ioASSET_Logo.png" style="height: 60px; width: 135px" />--%>
+                        <%--<img src="../Image/LRTA/LogoAndName2.png" style="height: 50px; width: 200px" />--%></span>
+                </a>
+                <!-- Header Navbar: style can be found in header.less -->
+                <nav class="navbar navbar-static-top">
+                    <!-- Sidebar toggle button-->
+
+                    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                    <div class="navbar-custom-menu">
+
+                        <ul class="nav navbar-nav">
+                            <%--added by nero 20220518--%>
+                            <li class="dropdown notifications-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" onclick="loadNotification()">
+                                    <i class="fa fa-bell-o" name="NotifIcon" onclick="loadNotification()"></i>
+                                    <span class="label label-warning" runat="server" id="NotifCount">10</span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <%--style="width:350px; height:100px;"--%>
+                                    <li class="header" runat="server" id="NotificationVNT" style="background-color: #3c8dbc; color: white; margin-bottom: 5px">You have 10 messages</li>
+                                    <li>
+                                        <ul class="menu" id="NotifMenu" runat="server">
+
+                                            <a onclick="" style="color: black;" href="../Home/Notification.aspx">
+                                                <table style="width: 100%;">
+                                                    <tr style="height: 40px">
+                                                        <%--Information--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/email.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="Messages" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">New messages</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+                                            <li class="header" runat="server" id="Li1" style="background-color: #3c8dbc; color: white; margin-bottom: 5px; padding: 6px">Pending Approval</li>
+                                            <a onclick="" style="color: black;" href="../Home/RequestManagement.aspx?tt=1" id="a1">
+                                                <table style="width: 100%;">
+                                                    <tr style="height: 40px">
+                                                        <%--GoodsReceive Approval--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/Goods Received_Approval.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="GRApproval" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Goods Receive</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <a onclick="" style="color: black;" href="../Home/RequestManagement.aspx?tt=3" id="a2">
+                                                <table style="width: 100%;">
+                                                    <tr style="height: 40px">
+                                                        <%--Property Issuance Approval--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/issuance_Approval.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="IssuanceApproval" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Property Issuance</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <a onclick="" style="color: black;" href="../Home/RequestManagement.aspx?tt=3" id="a3">
+                                                <table style="width: 100%;" hidden>
+                                                    <tr style="height: 40px">
+                                                        <%--Property Request Approval--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/request_Approval.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="PropertyRequestApproval" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Property Request</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <a onclick="" style="color: black;" href="../Home/RequestManagement.aspx?tt=4"  id="a4">
+                                                <table style="width: 100%;">
+                                                    <tr style="height: 40px">
+                                                        <%--Property Transfer Approval--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/transfer_Approval.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="PropertyTransferApproval" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Property Transfer</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <a onclick="" style="color: black;" href="../Home/RequestManagement.aspx?tt=5"  id="a5">
+                                                <table style="width: 100%;">
+                                                    <tr style="height: 40px">
+                                                        <%--Property Disposal Approval--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/disposal_Approval.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="PropertyDisposalApproval" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Property Disposal</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <a onclick="" style="color: black;" href="../Home/RequestManagement.aspx?tt=5"  id="a6">
+                                                <table style="width: 100%;" hidden>
+                                                    <tr style="height: 40px">
+                                                        <%--Property Disposal Approval--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/DisposalRequest.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="PropertyDisposalRequestApproval" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Property Disposal Request</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <a onclick="" style="color: black;" href="../Home/RequestManagement.aspx?tt=6"  id="a7">
+                                                <table style="width: 100%;" hidden>
+                                                    <tr style="height: 40px">
+                                                        <%--Property Gate Pass Approval--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/gatepass.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="PropertyGatePassApproval" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Property Gate Pass</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <a onclick="" style="color: black;" href="../Home/RequestManagement.aspx?tt=7"  id="a8">
+                                                <table style="width: 100%;" hidden>
+                                                    <tr style="height: 40px">
+                                                        <%--Property Day Pass Approval--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/daypass.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="PropertyDayPassApproval" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Personal Property Gate Pass</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <a onclick="" style="color: black;" href="../Home/RequestManagement.aspx?tt=8"  id="a9">
+                                                <table style="width: 100%;">
+                                                    <tr style="height: 40px">
+                                                        <%--File Upload Approval--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/File_upload.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="FileUploadApproval" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">File Upload</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <a onclick="" style="color: black;" href="../Home/RequestManagement.aspx?tt=11"  id="a10">
+                                                <table style="width: 100%;">
+                                                    <tr style="height: 40px">
+                                                        <%--Return Date Extension Approval--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/dataextension.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="ReturnDateExApproval" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Return Date Extension</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <a onclick="" style="color: black;" href="../Home/RequestManagement.aspx?tt=12"  id="a11">
+                                                <table style="width: 100%;">
+                                                    <tr style="height: 40px">
+                                                        <%--Property Issuance Approval--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/issuance_Approval.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="StockIssuanceApproval" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Supply Issuance</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <a onclick="" style="color: black;" href="../Home/RequestManagement.aspx?tt=12"  id="a12">
+                                                <table style="width: 100%;">
+                                                    <tr style="height: 40px">
+                                                        <%--Property Request Approval--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/request_Approval.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="StockRequestApproval" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Supply Request</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <a onclick="" style="color: black;" href="../Home/RequestManagement.aspx?tt=13"  id="a13">
+                                                <table style="width: 100%;">
+                                                    <tr style="height: 40px">
+                                                        <%--Property Disposal Approval--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/disposal_Approval.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="StockDisposalApproval" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Supply Disposal</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <li class="header" runat="server" id="Li2" style="background-color: #3c8dbc; color: white; margin-bottom: 5px; padding: 6px">Pending Verification</li>
+                                            <a onclick="" style="color: black;" href="../Operation_Module/PropertyVerification.aspx?tt=1" id="v1">
+                                                <table style="width: 100%;">
+                                                    <tr style="height: 40px">
+                                                        <%--GoodsReceive Verification--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/Goods Received_Approval.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="GRVerification" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Goods Receive</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <a onclick="" style="color: black;" href="../Operation_Module/PropertyVerification.aspx?tt=2"  id="v2">
+                                                <table style="width: 100%;">
+                                                    <tr style="height: 40px">
+                                                        <%--Property Issuance Verification--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/issuance_Approval.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="IssuanceVerification" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Property Issuance</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <a onclick="" style="color: black;" href="../Operation_Module/PropertyVerification.aspx?tt=4"  id="v3">
+                                                <table style="width: 100%;">
+                                                    <tr style="height: 40px">
+                                                        <%--Property Request Verification--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/request_Approval.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="PropertyRequestVerification" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Property Request</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <a onclick="" style="color: black;" href="../Operation_Module/PropertyVerification.aspx?tt=3"  id="v4">
+                                                <table style="width: 100%;">
+                                                    <tr style="height: 40px">
+                                                        <%--Property Transfer Verification--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/transfer_Approval.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="PropertyTransferVerification" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Property Transfer</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <a onclick="" style="color: black;" href="../Operation_Module/PropertyVerification.aspx?tt=6"  id="v5">
+                                                <table style="width: 100%;">
+                                                    <tr style="height: 40px">
+                                                        <%--Property Disposal Verification--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/disposal_Approval.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="PropertyDisposalVerification" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Property Disposal</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+
+                                            <a onclick="" style="color: black;" href="../Operation_Module/PropertyVerification.aspx?tt=5"  id="v6">
+                                                <table style="width: 100%;">
+                                                    <tr style="height: 40px">
+                                                        <%--Property Return Verification--%>
+                                                        <td style="width: 50px;">
+                                                            <img src="../pictures/Notifications/return_Verification.png" style="width: 30px; height: 30px; margin-left: 20px; margin-right: 20px" />
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                            <strong id="PropertyReturnVerification" runat="server">10</strong>
+                                                            <strong style="margin-left: 10px">Property Return</strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+                                        </ul>
+                                    </li>
+                                    <%--<li class="footer" style="background-color: white;" ><a href="Notification.aspx" >View all</a></li>--%>
+                                </ul>
+                            </li>
+
+                            <%--End Here--%>
+
+                            <li class="dropdown user user-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dpname" runat="server"></a>
+                                <ul class="dropdown-menu" id="userinfo" runat="server">
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar" style="height: auto;">
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel">
+                        <div class="pull-left image" runat="server" id="DP">
+                            <%--<img src="../AdminLTE-2.4.7/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">--%>
+                        </div>
+                        <div class="pull-left info">
+                            <br />
+                            <p id="lblUserName" runat="server"></p>
+                        </div>
+                    </div>
+
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <%-- <div runat="server" id="navbar_side"></div>--%>
+                    <ul class="sidebar-menu tree" data-widget="tree" runat="server" id="navbar_side">
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <asp:ContentPlaceHolder ID="BodyHolder" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <!-- /.content-wrapper -->
+            <footer class="main-footer">
+                <div class="pull-right hidden-xs">
+                    <b>Version</b>
+                    <asp:Label ID="lblMastVer" runat="server" Text="Label"></asp:Label>
+
+                </div>
+                <strong>
+                    <p style="font-style: normal; color: black;">Powered by Internet Of Things Phils. Inc.</p>
+                    <%--<p style="font-style: normal; color: black;">&copy; 2014-<%=DateTime.Now.Year %> Internet Of Things Phils. Inc. All rights reserved.</p>--%>
+                </strong>
+                <%--<strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights reserved.--%>
+            </footer>
+
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Create the tabs -->
+                <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                    <%--<li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+                    <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>--%>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <!-- Home tab content -->
+                    <div class="tab-pane" id="control-sidebar-home-tab">
+
+                        <ul class="control-sidebar-menu">
+                        </ul>
+                        <!-- /.control-sidebar-menu -->
+                    </div>
+                    <!-- /.tab-pane -->
+                    <!-- Stats tab content -->
+                    <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+                    <!-- /.tab-pane -->
+                </div>
+            </aside>
+            <!-- /.control-sidebar -->
+            <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
+            <div class="control-sidebar-bg"></div>
+        </div>
+        <!-- ./wrapper -->
+
+        <!-- jQuery 3.5 -->
+        <script src="../Scripts/jquery-3.5.1.js"></script>
+        <!-- jQuery 3.3 -->
+        <%--<script src="../AdminLTE-2.4.7/bower_components/jquery/dist/jquery.min.js"></script>--%>
+        <!-- jQuery UI 1.11.4 -->
+        <%--<script src="../AdminLTE-2.4.7/bower_components/jquery-ui/jquery-ui.min.js"></script>--%>
+        <!-- jQuery UI 1.13.2 -->
+        <script src="../Scripts/jquery-ui.min.js"></script>
+        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+        <script>
+            $.widget.bridge('uibutton', $.ui.button);
+        </script>
+        <!-- Bootstrap 3.3.7 -->
+        <script src="../Scripts/bootstrap.min.js"></script>
+        <!-- Morris.js charts -->
+        <script src="../Scripts/morris.min.js"></script>
+        <script src="../Scripts/raphael.min.js"></script>
+        <!-- daterangepicker -->
+        <%--<script src="../Scripts/moment.min.js"></script>--%>
+        <script src="../Scripts/moment.js"></script>
+        <script src="../Scripts/date-range-picker.js"></script>
+        <!-- datepicker -->
+        <script src="../Scripts/bootstrap-datepicker.min.js"></script>
+        <!-- TimePicker  added by nero-->
+        <script src="../Scripts/bootstrap-timepicker.js"></script>
+        <!-- Bootstrap WYSIHTML5 -->
+        <script src="../Scripts/bootstrap3-wysihtml5.all.min.js"></script>
+        <!-- Slimscroll -->
+        <script src="../Scripts/jquery.slimscroll.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="../Scripts/adminlte.min.js"></script>
+        <!-- Input Mask-->
+        <script src="../Scripts/jquery.inputmask.js"></script>
+        <%--<script src="../AdminLTE-2.4.7/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+        <script src="../AdminLTE-2.4.7/plugins/input-mask/jquery.inputmask.extensions.js"></script>--%>
+        <!-- select2 -->
+        <script src="../Scripts/select2.full.min.js"></script>
+        <!-- iCheck -->
+        <script src="../Scripts/icheck.min.js"></script>
+        <!-- data tables -->
+        <script src="../Scripts/jquery.dataTables.js"></script>
+        <script src="../Scripts/jquery.dataTables.min.js"></script>
+        <script src="../Scripts/jquery.dataTables-1.13.4.min.js"></script>
+        <script src="../Scripts/dataTables.select.min.js"></script>
+        <script src="../Scripts/dataTables.fixedColumns.min.js"></script>
+        <script src="../Scripts/jszip.min.js"></script>
+        <script src="../Scripts/vfs_fonts.js"></script>
+        <script src="../Scripts/buttons.print.min.js"></script>
+        <script src="../Scripts/buttons.html5.min.js"></script>
+        <script src="../Scripts/button.print.js"></script>
+        <script src="../Scripts/buttons.colVis.min.js"></script>
+        <script src="../Scripts/dataTables.buttons.min.js"></script>
+        <script src="../Scripts/dataTables.colReorder.min.js"></script>
+        <script src="../Scripts/dataTables.fixedHeader.min.js"></script>
+        <script src="../Scripts/xlsx.full.min.js"></script>
+        <!-- ChartJS -->
+        <script src="../Scripts/Chart.js"></script>
+
+        <%--sweetalert--%>
+        <script src="../Scripts/sweetalert.min.js"></script>
+
+        <!-- dropzonejs -->
+        <script src="../Scripts/dropzone.min.js"></script>
+        <script src="../Scripts/dropzone.js"></script>
+
+        <script src="../Script/AccessButton.js" type="text/javascript"></script>
+        <!-- Change Password Modal -->
+
+        <%--cookiebar--%>
+        <script src="../Scripts/jquery.cookiebar/jquery.cookiebar.js"></script>
+        <link href="Scripts/jquery.cookiebar/jquery.cookiebar.css" rel="stylesheet" />
+        <div id="modalAddAttachment" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: steelblue; text-align: center;">
+                        <button type="button" class="btn btn-sm btn-danger pull-right fa fa-close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4>
+                            <p style="color: white;"><span class="fa fa-paperclip"></span>&nbsp;Attachment</p>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-lg-12">
+                            <div class="row" hidden>
+                                <input id="txtTransactionNumber" maxlength="50" type="text" class="form-control" />
+                                <input id="txtTransactionType" maxlength="50" type="text" class="form-control" />
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-2 col-md-1 col-sm-3 col-xs-4">
+                                    Transaction No:
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-9 col-xs-8">
+                                    <label id="lblTransactionNumber" type="text" />
+                                </div>
+                            </div>
+                            <div id="divAttachements" runat="server"></div>
+                            <div class="row">
+                                <asp:FileUpload ID="fuAttachment" class="btn btn-sm btn-primary" AllowMultiple="true" runat="server" Style="width: 100%;" />
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="completetransaction">
+                        <button type="button" class="btn btn-sm btn-primary pull-right" id="btnAddAttachment" onclick="AddAttachment()">&nbsp;&nbsp;Add Attachment&nbsp;&nbsp;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%--USER--%>
+
+        <div class="modal fade" id="addUserDialog" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: steelblue; text-align: center;">
+                        <button type="button" class="btn btn-sm btn-danger pull-right fa fa-close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">
+                            <p style="color: white;">Add/Edit User</p>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                <label class="control-label" align="left">
+                                    First Name:
+                                </label>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <input id="txtFirstName" maxlength="50" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Last Name:
+                                </label>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <input id="txtLastName" maxlength="50" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Employee No.:
+                                </label>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <input id="txtEmployeeNo" maxlength="50" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row" hidden>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                Card No:
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <asp:TextBox ID="txtCardNo" runat="server" type="text" Style="width: 100%" ReadOnly="true" class="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                User Department:
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <div id="HTUserDept" class="input-group">
+                                    <select id="ddlDepartment1" onchange="GetPosition1();" class="form-control select2" data-dropdown-css-class="select2-primary" style="width: 100%; height: 35px"></select>
+                                    <span id="HTUserDeptC" class="btn btn-success input-group-addon" onclick="addDepartmentDialogBox('')"><i class="fa fa-plus"></i></span>
+                                </div>
+                                <%--<select id="ddlDepartment" class="form-control" style="width: 100%; height: 35px"></select>--%>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                Job Title:
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <div id="HTUserPosition" class="input-group">
+                                    <select id="ddlPosition" class="form-control select2" data-dropdown-css-class="select2-primary" style="width: 100%; height: 35px"></select>
+                                    <span id="HTUserPositionC" class="btn btn-success input-group-addon" onclick="addPositionDialogBox('')"><i class="fa fa-plus"></i></span>
+                                </div>
+                                <%--<select id="ddlPosition" class="form-control" style="width: 100%; height: 35px"></select>--%>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                               <asp:Label ID="lblSiteAdduser" runat="server" Text="Label"></asp:Label>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <div id="HTUserRegion" class="input-group">
+                                    <select id="ddlWarehouse1" class="form-control select2" data-dropdown-css-class="select2-primary" style="width: 100%; height: 35px"></select>
+                                    <span id="HTUserRegionC" class="btn btn-success input-group-addon" onclick="addWarehouseDialogBox()"><i class="fa fa-plus"></i></span>
+                                </div>
+                                <%--<asp:DropDownList ID="ddlSite" class="form-control" runat="server" Style="width: 100%; height: 35px"></asp:DropDownList>--%>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                <label class="control-label">
+                                    E-mail Address:
+                                </label>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <input id="txtEmail" type="text" class="form-control"/>
+                            </div>
+                        </div>
+                        <br />
+                        <div id="DivUsername">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                    <label class="control-label" align="left" id="lblUserId">
+                                        Username:
+                                    </label>
+                                </div>
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                    <input id="txtUsername" type="text" class="form-control"/>
+                                    <%--<asp:TextBox ID="txtUsername" MaxLength="50" runat="server" type="text" Style="width: 100%" class="form-control"></asp:TextBox>--%>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                Is Custodian:
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <input type="checkbox" id="chkCustodian" class="switch_1" />
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <%--style="pointer-events:none;opacity: 0.4;"--%>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">Custodian Type:</div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8" id="Custodians"></div>
+                            <input type="hidden" name="indexCtr" id="indexCtr" />
+                            <%-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                           Custodian:
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8" id="divCustodian">
+                            <asp:DropDownList ID="ddlIntegrator" class="form-control" runat="server" Style="width: 100%; height: 35px; display:none"></asp:DropDownList>
+                            <span id="MultiSelect1">
+                                <select class="select2" multiple="true"  id="multiSelect" runat="server" data-placeholder="   --- Select Custodian ---   " data-dropdown-css-class="select2-blue" style="width: 100%; ">  
+                                </select>
+                            </span>
+                        </div>--%>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                Is Administrative:
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <input type="checkbox" id="chkAdministrative" class="switch_1" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                Is Approver:
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <input type="checkbox" id="chkApprover" class="switch_1" />
+                            </div>
+                        </div>
+                        <br />
+                        <div hidden>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                    Is Inspector:
+                                </div>
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                    <input type="checkbox" id="chkInspector" class="switch_1" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                    Is Certifier:
+                                </div>
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                    <input type="checkbox" id="chkCertifier" class="switch_1" />
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                Image:
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <asp:FileUpload ID="FileUploadUser" class="form-control" onchange="getImageUser(event)" placeholder="Please Select .jpg, .jpeg file." runat="server" Style="width: 100%; height: 35px" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <%--<div class="col-lg-4 col-md-4 col-sm-10 col-xs-12">
+                                </div>--%>
+                            <div class="col-lg-2 col-md-2 col-sm-10 col-xs-12"></div>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" id="userImage1">
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-10 col-xs-12"></div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                Active:
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <input type="checkbox" id="chkActiveUser" class="switch_1" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="SaveCancelUser">
+                        <button type="button" class="btn btn-success btn_EditUser" id="btnCompleteRequest" onclick="SaveUser();">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">&nbsp;Cancel&nbsp;</button>
+                        <%--                    <asp:Button ID="btnUpload" UseSubmitBehavior="true" runat="server" class="btn btn-success" OnClick="Upload" Text="Save" Style="visibility: hidden" />
+                    <asp:Button ID="btnsave" UseSubmitBehavior="false" runat="server" class="btn btn-success btn_EditUser" OnClientClick="SaveUser(this);" Text="Save" />--%>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <%--FILES DATA--%>
+        <div id="addCategoryDialogBox" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: steelblue; text-align: center;">
+                        <button type="button" class="btn btn-sm btn-danger pull-right fa fa-close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">
+                            <p style="color: white;">Add/Edit Category</p>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <label class="control-label">
+                                    Inventory Account:
+                                </label>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                                <select id="ddlAssetInventoryAccount" class="form-control select2" data-dropdown-css-class="select2-primary" style="width: 100%; height: 35px"></select>
+                                <%--<asp:DropDownList ID="ddlAssetInventoryAccount" class="form-control select2" runat="server" Style="width: 100%; height: 35px"></asp:DropDownList>--%>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <label class="control-label" align="left">
+                                    Category:
+                                </label>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                                <input id="txtCategoryName" maxlength="50" type="text" onkeyup="return ReplaceStr2(this);" style="width: 100%" class="form-control" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Description:
+                                </label>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-10">
+                                <textarea class="form-control" id="txtDescriptionCat" rows="5" cols="1" style="width: 100%; height: 150px" onkeyup="CountChar(this.value,500,'cntCat', this.id); return ReplaceStr2(this);"></textarea>
+                                <h6>
+                                    <label><i id="cntCat"><b>500 remaining character(s)</b></i></label></h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input type="checkbox" class="switch_1 pull-left" id="chkActiveCat" />
+                                <label class="pull-left">&nbsp;&nbsp; Active</label>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="SaveCancelCategory">
+                        <button type="button" class="btn btn-success btn_EditCat" id="btnSaveCategory" onclick="SaveCategory()">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">&nbsp;Cancel&nbsp;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="addModelDialogBox" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: steelblue; text-align: center;">
+                        <button type="button" class="btn btn-sm btn-danger pull-right fa fa-close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">
+                            <p style="color: white;">Add/Edit Model</p>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <%--<div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <h6><b>Category:</b></h6>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <asp:DropDownList ID="ddlCategory" class="form-control" onchange="GetSubCategory()" runat="server" Style="width: 100%; height: 35px"></asp:DropDownList>
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <h6><b>Sub-Category:</b></h6>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <asp:DropDownList ID="ddlSubCategory" class="form-control" runat="server" Style="width: 100%; height: 35px"></asp:DropDownList>
+                        </div>
+                    </div>
+
+                    <br />--%>
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Model:
+                                </label>
+                            </div>
+
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+
+                                <input id="txtModel" maxlength="50" type="text" onkeyup="return ReplaceStr2(this);" style="width: 100%" class="form-control" />
+                                <%--<asp:TextBox ID="txtModel" MaxLength="50" runat="server" type="text" Style="width: 100%" class="form-control"></asp:TextBox>--%>
+                                <%--placeholder="Model Name"--%>
+                                <%--<input id="txtModel" maxlength="100" type="text" style="width: 100%" class="form-control" />--%>
+                            </div>
+
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Description:
+                                </label>
+                            </div>
+                            <%-- <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <textarea class="form-control" id="txtDescriptionModel" <%-- placeholder="Description"--%> rows="5" cols="1" style="width: 100%; height: 150px" onkeyup="CountChar(this.value,500,'cntModel', this.id); return ReplaceStr2(this);"></textarea>
+                                <h6>
+                                    <label><i id="cntModel"><b>500 remaining character(s)</b></i></label></h6>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <%--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <h6><b>Active:</b></h6>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <input type="checkbox" id="chkActive" class="checkbox" />
+                        </div>--%>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <%--<input type="checkbox" id="chkActive" class="checkbox icheckbox_flat-red pull-left" /><label class="pull-left">&nbsp;&nbsp; Active</label>--%>
+                                <input type="checkbox" class="switch_1 pull-left" id="chkActiveModel" />
+                                <label class="pull-left">&nbsp;&nbsp; Active</label>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer" id="SaveCancelModel">
+                        <button type="button" class="btn btn-success btn_EditModel" id="btnSaveModel" onclick="SaveModel()">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">&nbsp;Cancel&nbsp;</button>
+                        <%--<button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;</button>
+                    <button type="button" class="btn btn-sm btn-danger" id="btnDeleteLocation" onclick="DeleteLocation(this.id)">&nbsp;&nbsp;Yes&nbsp;&nbsp;</button>
+                        --%>
+                        <%--<asp:Button ID="upload" runat="server" class="btn btn-sm btn-success pull-left" OnClick="Upload" Text="Save" OnClientClick="SaveModel();" />--%>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="addClassificationDialogBox" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: steelblue; text-align: center;">
+                        <button type="button" class="btn btn-sm btn-danger pull-right fa fa-close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">
+                            <p style="color: white;">Add/Edit Classification</p>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-9 col-xs-9">
+                                <label class="control-label" align="left">
+                                    Classification Name:
+                                </label>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="txtClassificationName" maxlength="50" type="text" onkeyup="return ReplaceStr2(this);" style="width: 100%" class="form-control" />
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-9 col-xs-9">
+                                <label class="control-label" align="left">
+                                    Classification Code:
+                                </label>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="txtClassificationCode" maxlength="10" type="text" onkeyup="return ReplaceStr2(this);" style="width: 100%" class="form-control"/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-9 col-xs-9">
+                                <label class="control-label" align="left">
+                                    Description:
+                                </label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <textarea class="form-control" id="txtDescriptionClassification" <%--placeholder="Description"--%> rows="5" cols="1" style="width: 100%; height: 150px" onkeyup="CountChar(this.value,500,'cntClassification', this.id); return ReplaceStr2(this);"></textarea>
+                                <h6>
+                                    <label><i id="cntClassification"><b>500 remaining character(s)</b></i></label></h6>
+                                <%--</div><div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-3 col-sm-9 col-xs-9">
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input type="checkbox" class="switch_1 pull-left" id="chkActiveIsFloater" />
+                                <label class="pull-left">&nbsp;&nbsp; Floater</label>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-3 col-sm-9 col-xs-9">
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input type="checkbox" class="switch_1 pull-left" id="chkActiveClassification" />
+                                <label class="pull-left">&nbsp;&nbsp; Active</label>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+                        <div class="modal-footer" id="SaveCancelClass">
+                            <button type="button" class="btn btn-success btn_EditClass" id="btnSaveClassification" onclick="SaveClassification()">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">&nbsp;Cancel&nbsp;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="addBrandDialogBox" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: steelblue; text-align: center;">
+                        <button type="button" class="btn btn-sm btn-danger pull-right fa fa-close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">
+                            <p style="color: white;">Add/Edit Brand</p>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Brand:
+                                </label>
+                            </div>
+                            <%-- <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        </div>--%>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <input id="txtBrandName" maxlength="50" type="text" onkeyup="return ReplaceStr2(this);" <%--placeholder="Brand Name"--%> style="width: 100%" class="form-control" />
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Description:
+                                </label>
+                            </div>
+                            <%--   <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        </div>--%>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <textarea class="form-control" id="txtDescriptionBrand" <%--placeholder="Description"--%> rows="5" cols="1" style="width: 100%; height: 150px" onkeyup="CountChar(this.value,500,'cntBrand', this.id); return ReplaceStr2(this);"></textarea>
+                                <h6>
+                                    <label><i id="cntBrand"><b>500 remaining character(s)</b></i></label></h6>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <%--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <h6><b>Active:</b></h6>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <input type="checkbox" id="chkActive" class="checkbox" />
+                        </div>--%>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-1">
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <%--<div class="check">
+                                <input id="check" type="checkbox">
+                                <label for="check"></label>
+                            </div>--%>
+
+                                <%--<input type="checkbox" id="chkActive" class="checkbox icheckbox_flat-red pull-left" />--%>
+                                <input type="checkbox" class="switch_1 pull-left" id="chkActiveBrand" />
+                                <label class="pull-left">&nbsp;&nbsp; Active</label>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="SaveCancelBrand">
+                        <button type="button" class="btn btn-success btn_EditBrand" id="btnSaveBrand" onclick="SaveBrand()">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">&nbsp;Cancel&nbsp;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="addUnitOfMeasurementDialogBox" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: steelblue; text-align: center;">
+                        <button type="button" class="btn btn-sm btn-danger pull-right fa fa-close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">
+                            <p style="color: white;">Add/Edit Unit Of Measurement</p>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Unit of Measurement:
+                                </label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <input id="txtUnitOfMeasurement" maxlength="50" type="text"  onkeyup="return ReplaceStr2(this);"<%--placeholder="Unit of Measurement Name"--%> style="width: 100%" class="form-control" />
+                            </div>
+                            <%-- <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Unit of Measurement Code:
+                                </label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <input id="txtUnitOfMeasurementCode" <%-- placeholder="Unit of Measurement Code"--%> maxlength="10" type="text" onkeyup="return ReplaceStr2(this);" style="width: 100%" class="form-control" />
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Description:
+                                </label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <textarea class="form-control" id="txtDescriptionUOM" <%--placeholder="Description"--%> rows="5" cols="1" style="width: 100%; height: 150px" onkeyup="CountChar(this.value,500,'cntUOM', this.id); return ReplaceStr2(this);"></textarea>
+                                <h6>
+                                    <label><i id="cntUOM"><b>500 remaining character(s)</b></i></label></h6>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                        </div>
+
+                        <div class="row">
+                            <%--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <h6><b>Active:</b></h6>
+                        </div>--%>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <%--<input type="checkbox" id="chkActive" class="checkbox icheckbox_flat-red pull-left" /><label class="pull-left">&nbsp;&nbsp; Active</label>--%>
+                                <input type="checkbox" class="switch_1 pull-left" id="chkActiveUOM" />
+                                <label class="pull-left">&nbsp;&nbsp; Active</label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="SaveCancelUOM">
+                        <button type="button" class="btn btn-success btn_EditUOM" id="btnSaveUnitOfMeasurement" onclick="SaveUnitOfMeasurement()">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">&nbsp;Cancel&nbsp;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="addTagDialogBox" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-med">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: steelblue; text-align: center;">
+                        <button type="button" class="btn btn-sm btn-danger pull-right fa fa-close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4>
+                            <p style="color: white;">Add/Edit Tag</p>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Tag Type:
+                                </label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <%--   <div class="input-group">
+                                    <select id="ddlTagType" class="form-control select2" data-dropdown-css-class="select2-primary" style="width: 100%; height: 35px"></select>
+                                    <span class="btn btn-success input-group-addon" onclick="addTagTypeDialogBox()"><i class="fa fa-plus"></i></span>
+                                </div>--%>
+                                <select id="ddlTagType" class="form-control select2" data-dropdown-css-class="select2-primary" style="width: 100%; height: 35px"></select>
+
+                                <%--<asp:DropDownList ID="ddlTagType" class="form-control" runat="server" Style="width: 100%; height: 35px"></asp:DropDownList>--%>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Tag Name:
+                                </label>
+                            </div>
+                            <%-- <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="txtTag" maxlength="50" type="text" onkeyup="return ReplaceStr2(this);" <%--placeholder="Unit of Measurement Name"--%> style="width: 100%" class="form-control" />
+
+                                <%--<asp:TextBox ID="txtTag" MaxLength="50" runat="server" type="text" Style="width: 100%" class="form-control"></asp:TextBox>--%>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Description:
+                                </label>
+                            </div>
+
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <textarea class="form-control" id="txtDescriptionTag" rows="5" cols="1" style="width: 100%; height: 150px" onkeyup="CountChar(this.value,500,'cntTag', this.id);return ReplaceStr2(this);"></textarea>
+                                <h6>
+                                    <label><i id="cntTag"><b>500 remaining character(s)</b></i></label></h6>
+                                <%--</div><div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input type="checkbox" class="switch_1 pull-left" id="chkActiveTag" />
+                                <label class="pull-left">&nbsp;&nbsp; Active</label>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer" id="SaveCancelTag">
+                            <button type="button" class="btn btn-success btn_EditTag" id="btnSaveTag" onclick="SaveTag()">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">&nbsp;Cancel&nbsp;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="addTagTypeDialogBox" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: steelblue; text-align: center;">
+                        <button type="button" class="btn btn-sm btn-danger pull-right fa fa-close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">
+                            <p style="color: white;">Add/Edit Tag Type</p>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <%--<div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                            <asp:DropDownList ID="ddlLocation" class="form-control" runat="server" Style="width: 100%; height: 35px"></asp:DropDownList>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        </div>
+                    </div>
+                    <br />--%>
+                        <div class="row">
+                            <%--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <h6><b>Tag Type:</b></h6>
+                        </div>--%>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <input id="txtTagType" maxlength="50" type="text" placeholder="Tag Type" style="width: 100%" class="form-control" />
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <%--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <h6><b>Description:</b></h6>
+                        </div>--%>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <textarea class="form-control" id="txtDescriptionTagType" placeholder="Description" rows="5" cols="1" style="width: 100%; height: 150px" onkeyup="CountChar(this.value,500,'cntTagType', this.id)"></textarea>
+                                <h6>
+                                    <label><i id="cntTagType"><b>500 remaining character(s)</b></i></label></h6>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <%--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <h6><b>Active:</b></h6>
+                        </div>--%>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <input type="checkbox" id="chkActiveTagType" class="checkbox icheckbox_flat-red pull-left" /><label class="pull-left">&nbsp;&nbsp; Active</label>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success " id="btnSaveTagType" onclick="SaveTagType()">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">&nbsp;Cancel&nbsp;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="addAreaDialogBox" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: steelblue; text-align: center;">
+                        <button type="button" class="btn btn-sm btn-danger pull-right fa fa-close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">
+                            <p style="color: white;"><asp:Label ID="lblAddEditAreaDialog" runat="server" Text="Label"></asp:Label></p>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                                <label class="control-label" align="left">
+                                    <asp:Label ID="lblLocAreaDialog" runat="server" Text="Label"></asp:Label>
+                                </label>
+                                <%--<br />--%>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <div id="HDLoc" class="input-group">
+                                    <select id="ddlLocation" class="form-control select2" data-dropdown-css-class="select2-primary" style="width: 100%; height: 35px"></select>
+                                    <span id="HDLocC" class="btn btn-success input-group-addon" onclick="addLocationDialogBox()"><i class="fa fa-plus"></i></span>
+                                </div>
+                                <%--<asp:DropDownList ID="ddlLocation" class="form-control" runat="server" Style="width: 100%; height: 35px"></asp:DropDownList>--%>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                                <label class="control-label" align="left">
+                                     <asp:Label ID="lblAreaAreaDialog" runat="server" Text="Label"></asp:Label>
+                                </label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <input id="txtArea" maxlength="50" <%--placeholder="Area Name"--%> type="text" onkeyup="return ReplaceStr2(this);" style="width: 100%" class="form-control" />
+                            </div>
+                            <%--   <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                        </div>
+
+                        <br />
+
+
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Description:
+                                </label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <textarea class="form-control" id="txtDescriptionArea" <%--placeholder="Description"--%> rows="5" cols="1" style="width: 100%; height: 150px" onkeyup="CountChar(this.value,500,'cnt', this.id); return ReplaceStr2(this);"></textarea>
+                                <h6>
+                                    <label><i id="cnt"><b>500 remaining character(s)</b></i></label></h6>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                        </div>
+
+                        <div class="row">
+                            <%--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <h6><b>Active:</b></h6>
+                        </div>--%>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <%--<input type="checkbox" id="chkActive" class="checkbox icheckbox_flat-red pull-left" /><label class="pull-left">&nbsp;&nbsp; Active</label>--%>
+                                <input type="checkbox" class="switch_1 pull-left" id="chkActiveArea" />
+                                <label class="pull-left">&nbsp;&nbsp; Active</label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="SaveCancelArea">
+                        <button type="button" class="btn btn-success btn_EditArea" id="btnSaveArea" onclick="SaveArea()">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">&nbsp;Cancel&nbsp;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="addLocationDialogBox" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-med">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: steelblue; text-align: center;">
+                        <button type="button" class="btn btn-sm btn-danger pull-right fa fa-close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4>
+                            <p style="color: white;"><asp:Label ID="lblLocDialogAddEdit" runat="server" Text="Label"></asp:Label></p>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                                <label class="control-label" align="left">
+                                    <asp:Label ID="lblLocDialog" runat="server" Text="Label"></asp:Label>
+                                </label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <div id="HDSite" class="input-group">
+                                    <select id="ddlWarehouse" class="form-control select2" data-dropdown-css-class="select2-primary" style="width: 100%; height: 35px"></select>
+                                    <span id="HDSiteC" class="btn btn-success input-group-addon" onclick="addWarehouseDialogBox()"><i class="fa fa-plus"></i></span>
+                                </div>
+                                <%--<asp:DropDownList ID="ddlWarehouse" class="form-control" runat="server" Style="width: 100%; height: 35px"></asp:DropDownList>--%>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                                <label class="control-label" align="left">
+                                    <asp:Label ID="lblLocDialogDisp" runat="server" Text="Label"></asp:Label>
+                                </label>
+                            </div>
+                            <%-- <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <input id="txtLocation" maxlength="50" type="text" onkeyup="return ReplaceStr2(this);" <%--placeholder="Unit of Measurement Name"--%> style="width: 100%" class="form-control" />
+
+                                <%--<asp:TextBox ID="txtLocation" MaxLength="50" runat="server" type="text" Style="width: 100%" class="form-control"></asp:TextBox>--%>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                                <label class="control-label" align="left">
+                                    <asp:Label ID="lblLocCodeDialogDisp" runat="server" Text="Label"></asp:Label>
+                                </label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        </div>--%>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <input id="txtLocationCode" maxlength="5" type="text" onkeyup="return ReplaceStr2(this);" style="width: 100%" class="form-control" />
+                                <%--placeholder="Category Name"--%>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Description:
+                                </label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <textarea class="form-control" id="txtDescriptionLocation" <%-- placeholder="Description"--%> rows="5" cols="1" style="width: 100%; height: 150px" onkeyup="CountChar(this.value,500,'cntLocation', this.id); return ReplaceStr2(this);"></textarea>
+                                <h6>
+                                    <label><i id="cntLocation"><b>500 remaining character(s)</b></i></label></h6>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <%--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <h6><b>Active:</b></h6>
+                        </div>--%>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <%--<input type="checkbox" id="chkActive" class="checkbox icheckbox_flat-red pull-left" /><label class="pull-left">&nbsp;&nbsp; Active</label>--%>
+                                <input type="checkbox" class="switch_1 pull-left" id="chkActiveLocation" />
+                                <label class="pull-left">&nbsp;&nbsp; Active</label>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="SaveCancelLocation">
+                        <button type="button" class="btn btn-success btn_EditLocation" id="btnSaveLocation" onclick="SaveLocation()">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">&nbsp;Cancel&nbsp;</button>
+                        <%--<asp:Button ID="btnsave" UseSubmitBehavior="false" runat="server" class="btn btn-success  pull-left" OnClick="Upload" OnClientClick="SaveLocation();" Text="Save" />--%>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="addWarehouseDialogBox" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-med">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: steelblue; text-align: center;">
+                        <button type="button" class="btn btn-sm btn-danger pull-right fa fa-close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4>
+                            <p style="color: white;"> <asp:Label ID="lblWarehouseAddEdit" runat="server" Text="Label"></asp:Label></p>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                <label class="control-label" align="left">
+                                     <asp:Label ID="lblWarehouseSite" runat="server" Text="Label"></asp:Label>
+                                </label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <input id="txtWarehouseName" maxlength="50" type="text" onkeyup="return ReplaceStr2(this);" style="width: 100%" class="form-control" />
+                            </div>
+                            <%-- <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                <label class="control-label" align="left">
+                                    <asp:Label ID="lblSiteCodeDialogDisp" runat="server" Text="Label"></asp:Label>
+                                </label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        </div>--%>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <input id="txtSiteCode" maxlength="5" type="text" onkeyup="return ReplaceStr2(this);" style="width: 100%" class="form-control" />
+                                <%--placeholder="Category Name"--%>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                        </div>
+                        <br />
+
+
+                        <div class="row">
+                            <%--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <h6><b>Active:</b></h6>
+                        </div>--%>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <%-- <input type="checkbox" id="chkActive" class="checkbox icheckbox_flat-red pull-left" /><label class="pull-left">&nbsp;&nbsp; Active</label>--%>
+                                <input type="checkbox" class="switch_1 pull-left" id="chkActiveSite" />
+                                <label class="pull-left">&nbsp;&nbsp; Active</label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer" id="SaveCancelSite">
+                        <button type="button" class="btn btn-success btn_EditSite" id="btnSaveWarehouse" onclick="SaveWarehouse()">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">&nbsp;Cancel&nbsp;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="addPositionDialogBox" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-med">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: steelblue; text-align: center;">
+                        <button type="button" class="btn btn-sm btn-danger pull-right fa fa-close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">
+                            <p style="color: white;">Add/Edit Job Title</p>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                                <label class="control-label" align="left">
+                                    User Department:
+                                </label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <div id="HDDept" class="input-group">
+                                    <select id="ddlDepartment" class="form-control select2" data-dropdown-css-class="select2-primary" style="width: 100%; height: 35px"></select>
+                                    <span id="HDDeptC" class="btn btn-success input-group-addon" onclick="addDepartmentDialogBox('')"><i class="fa fa-plus"></i></span>
+                                </div>
+                                <%--<asp:DropDownList ID="ddlDepartment" class="form-control" runat="server" Style="width: 100%; height: 35px"></asp:DropDownList>--%>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Job Title:
+                                </label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <input id="txtPositionName" <%--placeholder="Job Title"--%> maxlength="100" type="text" onkeyup="return ReplaceStr2(this);" style="width: 100%" class="form-control" />
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                        </div>
+                        <br />
+
+
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Description:
+                                </label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <textarea class="form-control" id="txtDescriptionJobTitle" <%--placeholder="Description"--%> rows="5" cols="1" style="width: 100%; height: 150px" onkeyup="CountChar(this.value,500,'cntJobTitle', this.id); return ReplaceStr2(this);"></textarea>
+                                <h6>
+                                    <label><i id="cntJobTitle"><b>500 remaining character(s)</b></i></label></h6>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                        </div>
+
+                        <div class="row">
+                            <%--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <h6><b>Active:</b></h6>
+                        </div>--%>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <%-- <input type="checkbox" id="chkActive" class="checkbox icheckbox_flat-red pull-left" /><label class="pull-left">&nbsp;&nbsp; Active</label>--%>
+                                <input type="checkbox" class="switch_1 pull-left" id="chkActiveJobTitle" />
+                                <label class="pull-left">&nbsp;&nbsp; Active</label>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="SaveCancelPosition">
+                        <button type="button" class="btn btn-success btn_EditPosition" id="btnSaveBrand" onclick="SavePosition()">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">&nbsp;Cancel&nbsp;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="addDepartmentDialogBox" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: steelblue; text-align: center;">
+                        <button type="button" class="btn btn-sm btn-danger pull-right fa fa-close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">
+                            <p style="color: white;">Add/Edit User Department</p>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                                <label class="control-label" align="left">
+                                    User Department:
+                                </label>
+                            </div>
+                            <%-- <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <input id="txtDepartmentName" type="text" onkeyup="return ReplaceStr2(this);" maxlength="100" <%--placeholder="Department"--%> style="width: 100%" class="form-control" />
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                                <label class="control-label" align="left">
+                                    Description:
+                                </label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        </div>--%>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <textarea class="form-control" id="txtDescriptionDept" <%--placeholder="Description"--%> rows="5" cols="1" style="width: 100%; height: 150px" onkeyup="CountChar(this.value,500,'cntDept', this.id); return ReplaceStr2(this);"></textarea>
+                                <h6>
+                                    <label><i id="cntDept"><b>500 remaining character(s)</b></i></label></h6>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <%--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <h6><b>Active:</b></h6>
+                        </div>--%>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <%--<input type="checkbox" id="chkActive" class="checkbox icheckbox_flat-red pull-left" /><label class="pull-left">&nbsp;&nbsp; Active</label>--%>
+                                <input type="checkbox" class="switch_1 pull-left" id="chkActiveDept" />
+                                <label class="pull-left">&nbsp;&nbsp; Active</label>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="SaveCancelDepartment">
+                        <button type="button" class="btn btn-success btn_EditDepartment" id="btnSaveDepartment" onclick="SaveDepartment()">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">&nbsp;Cancel&nbsp;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="addSupplierDialogBox" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: steelblue; text-align: center;">
+                        <button type="button" class="btn btn-sm btn-danger pull-right fa fa-close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">
+                            <p style="color: white;">Add/Edit Supplier</p>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
+                                <label class="control-label" align="left">
+                                    Supplier Name:
+                                </label>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="txtSupplierName" maxlength="50" type="text" onkeyup="return ReplaceStr2(this);" style="width: 100%" class="form-control" />
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <%--                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
+                             <label class="control-label" align="left">
+                                Address:
+                            </label>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                            <input id="txtAddress" type="text" style="width: 100%" class="form-control" />
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
+                             <label class="control-label" align="left">
+                                Contact Person:
+                            </label>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                            <input id="txtContactPerson" type="text" style="width: 100%" class="form-control" />
+                        </div>
+                    </div>
+
+                    <br />--%>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
+                                <label class="control-label" align="left">
+                                    Contact Number:
+                                </label>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="txtContactNo" <%--placeholder="Contact Number"--%> type="text"  style="width: 100%" class="form-control" />
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
+                                <label class="control-label" align="left">
+                                    Email Address:
+                                </label>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <input id="txtEmailAddress" type="text" pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" size="50" style="width: 100%" class="form-control"  />
+                            </div>
+                        </div>
+
+
+                        <%--<br />
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
+                             <label class="control-label" align="left">
+                                Description:
+                            </label>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                            <textarea class="form-control" id="txtDescription" rows="5" cols="1" style="width: 100%; height: 150px" onkeyup="CountChar(this.value,100,'cnt', this.id)"></textarea>
+                            <h6>
+                                <label><i id="cnt"><b>100 remaining character(s)</b></i></label></h6>
+                        </div>
+                    </div>--%>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <%--<input type="checkbox" id="chkActive" class="checkbox icheckbox_flat-red pull-left" /><label class="pull-left">&nbsp;&nbsp; Active</label>--%>
+                                <input type="checkbox" class="switch_1 pull-left" id="chkActiveSupplier" />
+                                <label class="pull-left">&nbsp;&nbsp; Active</label>
+                            </div>
+                            <%--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        </div>--%>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="SaveCancelSupplier">
+                        <button type="button" class="btn btn-success btn_EditSupplier" id="btnSaveSupplier" onclick="SaveSupplier()">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">&nbsp;Cancel&nbsp;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="addDeviceDialogBox" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: steelblue; text-align: center;">
+                        <button type="button" class="btn btn-sm btn-danger pull-right fa fa-close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">
+                            <p style="color: white;">Add/Edit Device</p>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                Device Name:
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <input id="txtDeviceName" maxlength="50" type="text" placeholder="Max Length is 50" style="width: 100%" class="form-control" />
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                IP Address:
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <input id="txtIPaddress" maxlength="50" type="text" style="width: 100%" class="form-control" />
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                Port:
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <input id="txtPort" type="text" style="width: 100%" class="form-control" onkeypress="return onlyNos(event,this)" />
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                Description:
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <textarea class="form-control" id="txtDescriptionDeviceMngt" rows="5" cols="1" style="width: 100%; height: 150px" onkeyup="CountChar(this.value,500,'cntDeviceMngt', this.id)"></textarea>
+                                <h6>
+                                    <label><i id="cntDeviceMngt"><b>500 remaining character(s)</b></i></label></h6>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                Device Usage Type:
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <select id="ddlDeviceUsageType" class="form-control select2" data-dropdown-css-class="select2-primary" style="width: 100%; height: 35px"></select>
+
+                                <%--<asp:DropDownList ID="ddlDeviceUsageType" class="form-control" runat="server" Style="width: 100%; height: 35px"></asp:DropDownList>--%>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                Active:
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <input type="checkbox" id="chkActiveDeviceMngt" class="switch_1" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="SaveCancelDeviceMngt">
+                        <button type="button" class="btn btn-success btn_EditDeviceMngt" id="btnSaveDevice" onclick="SaveDevice()">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="ClearDeviceMngt()">&nbsp;Cancel&nbsp;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="changePassDialog" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="ClearPass()">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Update Profile</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                Current Password:
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <asp:TextBox ID="txtPasswordM" runat="server" placeholder="Current Password" class="form-control" TextMode="Password"></asp:TextBox>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                New Password:
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <asp:TextBox ID="txtNewPassword" runat="server" placeholder="New Password" class="form-control" TextMode="Password"></asp:TextBox>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                Confirm Password:
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                <%--<asp:TextBox ID="txtConfirmPassword" runat="server" placeholder="Confirm Password" class="form-control" TextMode="Password"></asp:TextBox>--%>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <%--<button type="button" class="btn btn-sm btn-success" id="btnSavePassword" onclick="ChangePassword()">&nbsp;&nbsp;ChangePassword&nbsp;&nbsp;</button>--%>
+                        <button type="button" class="btn btn-sm btn-success" id="btnSavePassword" onclick="../User_Management/User_Update.aspx">&nbsp;&nbsp;ChangePassword&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" onclick="ClearPass()">&nbsp;Cancel&nbsp;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="SessionTimeout" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: indianred; text-align: center;">
+                        <h4 class="modal-title" style="color: white;">Session Expiring!</h4>
+                    </div>
+                    <div class="modal-body">
+                        Your Session will expire in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br />
+                        Do you want to reset?
+                            <%--<asp:Button ID="btnReset" type="button" Text="Reset" runat="server" OnClick="ResetSessions" />--%>
+                    </div>
+                    <div class="modal-footer">
+                        <center><button type="button" id="btnresetsession" class="btn btn-success" onclick="ResetSession()">Yes</button>
+                        <button type="button" id="btndontresetsession"  class="btn btn-danger" onclick="DontResetSession()">No</button></center>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            var reload = false;
+            $(document).ready(function () {
+                $.cookieBar(
+                    {//
+                        message: 'By using this website you allow us to place cookies on your computer. They are harmless and never personally identify you. ', //Message displayed on bar
+                        acceptButton: true, //Set to true to show accept/enable button
+                        acceptText: 'I Understand', //Text on accept/enable button
+                        acceptFunction: function (cookieValue) { if (cookieValue != 'enabled' && cookieValue != 'accepted') window.location = window.location.href; }, //Function to run after accept
+                        declineButton: true, //Set to true to show decline/disable button
+                        declineText: 'Disable Cookies', //Text on decline/disable button
+                        declineFunction: function (cookieValue) { if (cookieValue == 'enabled' || cookieValue == 'accepted') window.location = window.location.href; }, //Function to run after decline
+                        policyButton: false, //Set to true to show Privacy Policy button
+                        policyText: 'Privacy Policy', //Text on Privacy Policy button
+                        policyURL: '/privacy-policy/', //URL of Privacy Policy
+                        autoEnable: false, //Set to true for cookies to be accepted automatically. Banner still shows
+                        acceptOnContinue: false, //Set to true to accept cookies when visitor moves to another page
+                        acceptOnScroll: false, //Set to true to accept cookies when visitor scrolls X pixels up or down
+                        acceptAnyClick: false, //Set to true to accept cookies when visitor clicks anywhere on the page
+                        expireDays: 1, //Number of days for cookieBar cookie to be stored for
+                        renewOnVisit: false, //Renew the cookie upon revisit to website
+                        forceShow: false, //Force cookieBar to show regardless of user cookie preference
+                        effect: 'slide', //Options: slide, fade, hide
+                        element: 'body', //Element to append/prepend cookieBar to. Remember "." for class or "#" for id.
+                        append: true, //Set to true for cookieBar HTML to be placed at base of website. Actual position may change according to CSS
+                        fixed: true, //Set to true to add the class "fixed" to the cookie bar. Default CSS should fix the position
+                        bottom: true, //Force CSS when fixed, so bar appears at bottom of website
+                        zindex: '999', //Can be set in CSS, although some may prefer to set here
+                        domain: String(window.location.hostname), //Location of privacy policy
+                        referrer: String(document.referrer) //Where visitor has come from
+                    });
+
+                $(document).on('focus', '.select2-selection.select2-selection--single', function (e) {
+                    $(this).closest(".select2-container").siblings('select:enabled').select2('open');
+                });
+
+                $('select:not(.normal)').each(function () {
+                    $(this).select2({
+                        dropdownParent: $(this).parent()
+                    });
+                });
+
+                //function ssanotification() {
+                //    try {
+                //        var xx = $('#hfLicense').text();
+                //        if (xx != "") {
+                //            swal('Software Support Agreement', xx, 'warning');
+                //        }
+                //    } catch (error) {
+                //        console.log(error);
+                //    }
+                //}
+                //ssanotification();
+
+                window.onbeforeunload = function () {
+                }
+                $("a").click(function () {
+                    window.onbeforeunload = function () {
+
+                    }
+                });
+                $(document.body).on("change", "select", function () {
+                    reload = true;
+                });
+
+                $(document).keydown(function (e) {
+                    if ((e.keyCode == 82 && e.ctrlKey) || (e.keyCode == 116)) {
+                        reload = false;
+                    }
+                    else {
+                        reload = true;
+                    }
+                    if (reload == true) {
+                        window.onbeforeunload = function () {
+                            return 'You have unsaved changes!';
+                        }
+                    }
+                });
+
+                if (typeof jQuery !== 'undefined') {
+                    console.log('jQuery Loaded');
+                }
+                else {
+                    console.log('not loaded yet');
+                }
+
+                //    ResetTheTimer();
+                //    $('body').mousemove(function () { // or other events
+                //        ResetTheTimer();
+                //    });
+                //    $('body').keydown(function () { // or other events
+                //        ResetTheTimer();
+                //    });
+                //});
+
+                ResetTheTimer();
+                $('body').click(function () { // or other events
+                    ResetTheTimer();
+                });
+                $('body').mousemove(function () { // or other events
+                    //ResetTheTimer();
+                });
+                $('body').keydown(function () { // or other events
+                    ResetTheTimer();
+                });
+            });
+
+            var intervalset;
+            var MilliSecondsTimeOut = "<%= Session.Timeout %>" * 1000 * 60;
+            function ResetTheTimer() {
+                clearInterval(intervalset);
+                intervalset = window.setInterval(Redirect, MilliSecondsTimeOut);
+                $.ajax({
+                    type: "POST",
+                    url: "ResetSession.aspx/RefreshSession",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r) {
+                        console.log('reset');
+                    },
+                    error: function (r) {
+                        //alert(r.d);
+                    }
+                });
+            }
+            function Redirect() {
+                //alert(1);
+                LogOut();
+                window.location.href = '/login.aspx';
+            }
+        </script>
+
+        <script src="../Script/Common.js" type="text/javascript"></script>
+        <style>
+              .select2-selection__rendered {
+            word-wrap: break-word !important;
+            overflow: hidden;
+            text-overflow: inherit !important;
+            white-space: normal !important;
+            height: 35px !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            white-space: normal;
+            overflow: hidden;
+            text-overflow: inherit !important;
+            height: 35px !important;
+        }
+        </style>
+    </form>
+</body>
+</html>

@@ -1,0 +1,55 @@
+/* (A) LIST TO MENU */
+.treeko, .sectionko ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.treeko {
+  background: #fbfbfb;
+  border: 1px solid #d2d2d2;
+}
+.treeko li {
+  border-bottom: 1px solid #d2d2d2;
+  padding: 15px 10px;
+}
+.treeko li:last-child {
+  border: 0;
+}
+
+/* (B) SUB-SECTIONS */
+/* (B1) TOGGLE SHOW/HIDE */
+.sectionko ul { display: none; }
+.sectionko input:checked ~ ul { display: block; }
+
+/* (B2) HIDE CHECKBOX */
+.sectionko input[type=checkbox] { display: none; }
+
+/* (B3) ADD EXPAND/COLLAPSE ICON  */
+.sectionko { 
+  position: relative; 
+  padding-left: 35px !important;
+}
+.sectionko label:after {
+  content: "\25BA ";
+  position: absolute;
+  top: 0; left: 0;
+  padding: 10px;
+  text-align: center;
+  font-size: 25px;
+  color: #3c8dbc;
+  transition: all 0.5s;
+}
+.sectionko input:checked ~ label:after { 
+  color: #d73925;
+  transform: rotate(90deg);
+}
+
+/* (B4) SUB-SECTION ITEMS */
+.sectionko ul { margin-top: 10px; }
+.sectionko ul li { color: #333; }
+
+/* DOES NOT MATTER */
+.treeko {
+  font-family: arial, sans-serif;
+  font-size: 18px;
+}

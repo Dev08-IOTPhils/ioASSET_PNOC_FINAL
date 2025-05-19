@@ -1,0 +1,6 @@
+FirstName|LastName|EmailAddress|UserName|EmployeeNo|Site|IsCustodian|CustodianType|UserDepartment|JobTitle|IsAdministrative|IsApprover|BatchName
+1. Required 2. Duplicate not allowed|1. Required 2. Duplicate not allowed|1. Required 2. Duplicate not allowed|1. Required 2. Duplicate not allowed|1. Required 2. Duplicate not allowed|1. Required|1. Input 'YES' OR 'NO'|1. Required|1. Required|1. Required|1. Input 'YES' OR 'NO'|1. Input 'YES' OR 'NO'|1. Required 2. Enter the same batch name in each row/property
+Juan|Magtanggol|aaa@gmail|juan02|emp01|Head Office - Arcel|NO||Software Development|Quality Assurance|NO|NO|Batch10
+Maria|Osa|bbb@gmail|mari01|emp02|Head Office - Arcel|NO||Software Development|Quality Assurance|NO|NO|Batch10
+Warner|Dela Santos|ccc@gmail|war01|emp03|Head Office - Arcel|NO||Software Development|Quality Assurance|NO|NO|Batch10
+Carrie|Man|ddd@gmail|car01|emp04|Head Office - Arcel|NO||Software Development|Quality Assurance|NO|NO|Batch10

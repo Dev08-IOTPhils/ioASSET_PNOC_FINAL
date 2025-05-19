@@ -1,0 +1,4 @@
+ItemCode|Quantity|CustodianType|Site|BatchName
+Required|1. Required 2. Alphabets are not allowed|Required|Required|1. Required 2. Enter the same batch name in each row/property
+ENV-ACC|100|Supplies|BGC - Admin PRM|Batch 1
+ENV-ACC|200|Supplies|BGC - Admin PCM|Batch 1
