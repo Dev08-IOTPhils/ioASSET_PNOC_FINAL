@@ -70,7 +70,8 @@
                     </div>
                 </div>
 
-<%--                Added by: Domdom--%>
+
+<%--                Added by: Domdom pogiiiiiiiii--%>
                 <br />
                 <label>Contact us at</label>
                 <div class="row">
