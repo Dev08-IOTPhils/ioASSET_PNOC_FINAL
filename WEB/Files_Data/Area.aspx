@@ -10,7 +10,7 @@
             <%--<small>Control panel</small>--%>
         </h1>
         <ol class="breadcrumb" runat="server" id="navigation_bread">
-            <li><i class="fa fa-folder"></i>Files Data</li>
+            <li><i class="fa fa-folder"></i>Files Datas</li>
             <li><asp:Label ID="lblbreadCrumb" runat="server" Text="Label"></asp:Label></li>
         </ol>
     </section>
