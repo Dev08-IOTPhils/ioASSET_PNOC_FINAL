@@ -661,7 +661,7 @@ public partial class System_DataUpload : BasePage
                     for (int i = 0; i < dtCSV.Rows.Count; i++)
                     {
                         //Added by: Domdom
-                        string IssuanceNo = "0";
+                        string IssuanceNo = "";
                         string col1 = dtCSV.Rows[i]["ItemCode"].ToString();
                         string col2 = dtCSV.Rows[i]["SerialNumber"].ToString();
                         string col3 = dtCSV.Rows[i]["CustodianType"].ToString();
@@ -677,7 +677,7 @@ public partial class System_DataUpload : BasePage
                         {
                             IssuanceNo = "1";
                         }
-                        else
+                        if (dtCSV.Rows[i]["IssuanceNo"].ToString() == "" && dtCSV.Rows[i]["EmployeeNo"].ToString() != "")
                         {
                             IssuanceNo = "0";
                         }

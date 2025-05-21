@@ -1,0 +1,12 @@
+PropertyNumber|ItemCode|SerialNumber|LongDescription|DateOfAcquisition|WarrantyStartDate|WarrantyEndDate|InsuranceStartDate|InsuranceEndDate|ExpiryDate|CustodianType|Supplier|PRNumber|PONumber|InvoiceNumber|DRNumber|Remarks|AcquiredCost|Site|Location|Area|IssuanceNo|EmployeeNo|BatchName
+1. Required 2. Duplicate not allowed|Required|1. Required 2. Duplicate is allowed|Optional|1.  Date Format only  (mm/dd/yyyy). 2. Alphanumeric characters are not allowed. 3. Leave blank if no date|1.  Date Format only  (mm/dd/yyyy). 2. Alphanumeric characters are not allowed. 3. Leave blank if no date|1.  Date Format only  (mm/dd/yyyy). 2. Alphanumeric characters are not allowed. 3. Leave blank if no date|1.  Date Format only  (mm/dd/yyyy). 2. Alphanumeric characters are not allowed. 3. Leave blank if no date|1.  Date Format only  (mm/dd/yyyy). 2. Alphanumeric characters are not allowed. 3. Leave blank if no date|1.  Date Format only  (mm/dd/yyyy). 2. Alphanumeric characters are not allowed. 3. Leave blank if no date|Required|Required|Optional|Optional|Optional|Optional|Optional|1. Required 2.Alphabets are not allowed|Required|Required|Required|Optional|1. Required 2. Employee ID registered in User Management|1. Required 2. Enter the same batch name in each row/property
+200011|PAN01|ASH001||||||||Property|IOT SUPPLIER||||||409615|Head Office - BGC|Building 4|BLDG 4 - GH|AAA|IOT46801|Batch1 PPEs
+200012|PAN01|ASH002||||||||Property|IOT SUPPLIER||||||409615|Head Office - BGC|Building 4|BLDG 4 - GH|AAA|IOT46801|Batch1 PPEs
+200013|PAN01|ASH003||||||||Property|IOT SUPPLIER||||||409615|Head Office - BGC|Building 4|BLDG 4 - GH|AAA|IOT46801|Batch1 PPEs
+200014|PAN01|ASH004||||||||Property|IOT SUPPLIER||||||409615|Head Office - BGC|Building 4|BLDG 4 - GH|AAA|IOT46801|Batch1 PPEs
+200015|PAN01|ASH005||||||||Property|IOT SUPPLIER||||||409615|Head Office - BGC|Building 4|BLDG 4 - GH|AAA|IOT46801|Batch1 PPEs
+200016|PAN01|ASH006||||||||Property|IOT SUPPLIER||||||409615|Head Office - BGC|Building 4|BLDG 4 - GH|AAA|IOT46801|Batch1 PPEs
+200017|PAN01|ASH007||||||||Property|IOT SUPPLIER||||||409615|Head Office - BGC|Building 4|BLDG 4 - GH|AAA|IOT46801|Batch1 PPEs
+200018|PAN01|ASH008||||||||Property|IOT SUPPLIER||||||409615|Head Office - BGC|Building 4|BLDG 4 - GH|AAA|IOT46801|Batch1 PPEs
+200019|PAN01|ASH009||||||||Property|IOT SUPPLIER||||||409615|Head Office - BGC|Building 4|BLDG 4 - GH|AAA|IOT46801|Batch1 PPEs
+200020|PAN01|ASH010||||||||Property|IOT SUPPLIER||||||409615|Head Office - BGC|Building 4|BLDG 4 - GH|AAA|IOT46801|Batch1 PPEs
