@@ -1,5 +1,7 @@
 ﻿var url = "";
 
+var code = "";
+var balanceqty = 0;
 $(document).ready(function () {
     //alert('request');
     $('.select2').select2();
@@ -676,7 +678,9 @@ function populateDataTable(data) {
 
                 var currentRow = $(this).closest("tr");
                 var itemcode = currentRow.find("td:eq(0)").text();
+                var remainingqty = currentRow.find("td:eq(6)").text();
                 code = itemcode;
+                balanceqty = remainingqty;
                 var smlid = $(this).attr('smlid');
 
                 SMLID = smlid;
@@ -1398,19 +1402,27 @@ function CancelStockRequest(stockrequestno) {
     });
 }
 
-var code = "";
 function checkQuantity() {
     var qty = $('#txtRequestQuantity').val();
-
-    $.ajax({
-        type: "POST",
-        url: url + "/StockRequest.aspx/checkQuantity",
-        data: "{itemCode: '" + code + "'}",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg) {
-            // alert(msg.d);
-            if (parseInt(msg.d) < parseInt(qty)) {
+    //$.ajax({
+    //    type: "POST",
+    //    url: url + "/StockRequest.aspx/checkQuantity",
+    //    data: "{itemCode: '" + code + "'}",
+    //    contentType: "application/json; charset=utf-8",
+    //    dataType: "json",
+    //    success: function (msg) {
+    //        // alert(msg.d);
+    //        if (parseInt(msg.d) < parseInt(qty)) {
+    //            $("#divInsuficientStock").show();
+    //            isSufficient = false;
+    //        }
+    //        else {
+    //            $("#divInsuficientStock").hide();
+    //            isSufficient = true;
+    //        }
+    //    }
+    //});
+            if (parseInt(qty) > parseInt(balanceqty)) {
                 $("#divInsuficientStock").show();
                 isSufficient = false;
             }
@@ -1418,8 +1430,6 @@ function checkQuantity() {
                 $("#divInsuficientStock").hide();
                 isSufficient = true;
             }
-        }
-    });
 }
 
 function Clear() 
