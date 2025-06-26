@@ -107,7 +107,7 @@ $(document).ready(function () {
                 }
             });
         }
-        });
+    });
 
     $('#ciiruspxcl').off('click').on('click', function () {
 
@@ -123,12 +123,12 @@ $(document).ready(function () {
         const formattedDateTime = `${year}${month}${day}${hours}${minutes}${seconds}`;
 
         var context = window.location.pathname.substring(1);
-        
+
         if (excelcount == 1) {
             swal("Warning", "Please select list of IIRUSP", "warning");
         }
 
-        else{
+        else {
             //alert(disposalnumberrequest);
             $.ajax({
                 async: false,
@@ -163,8 +163,8 @@ $(document).ready(function () {
                     console.log(xhr);
                 }
             });
-    }
-        });
+        }
+    });
 
     $('#cwmrxcl').off('click').on('click', function () {
 
@@ -223,7 +223,7 @@ $(document).ready(function () {
             });
         }
     });
-    
+
 
     $('#wmrxcl').off('click').on('click', function () {
 
@@ -1094,7 +1094,7 @@ $(document).ready(function () {
 
     $("#tblAssetList").DataTable().clear().draw();
     $("#tblPendingUpload").DataTable().clear().draw();
-    $("#tblPendingUpload1").DataTable().clear().draw(); 
+    $("#tblPendingUpload1").DataTable().clear().draw();
 
 
     $('#BodyHolder_btnComplete').fadeIn();
@@ -2069,7 +2069,7 @@ function populateDataTablePendingUpload(data) {
     try {
 
 
-       var mytable = $('#tblPendingUpload').DataTable({
+        var mytable = $('#tblPendingUpload').DataTable({
             "destroy": true,
             "processing": true, select: { style: 'multi' },
             fixedHeader: {
@@ -2091,7 +2091,7 @@ function populateDataTablePendingUpload(data) {
                 { "data": "Status" },
                 { "data": "Action" }
             ]
-            , dom: 'Brftip',
+             , dom: 'Brftip',
             buttons: {
                 buttons: [
                 {
@@ -2127,23 +2127,23 @@ function populateDataTablePendingUpload(data) {
                     dropup: false, //btn btn-sm btn-success
                 },
                 { //Deselect all current data and then selects all row with TypeCost PAR
-                     text: 'Select PAR',
-                     action: function () {
-                         $('#tblPendingUpload').DataTable().rows().deselect();
+                    text: 'Select PAR',
+                    action: function () {
+                        $('#tblPendingUpload').DataTable().rows().deselect();
 
-                         $('#tblPendingUpload').DataTable().rows(':contains("PAR")').select()
+                        $('#tblPendingUpload').DataTable().rows(':contains("PAR")').select()
 
                     }
                 },//Deselect all current data and then selects all row with TypeCost ICS HIGH AND ICS LOW
                                 {
-                     text: 'Select ICS',
-                     action: function () {
-                         $('#tblPendingUpload').DataTable().rows().deselect();
+                                    text: 'Select ICS',
+                                    action: function () {
+                                        $('#tblPendingUpload').DataTable().rows().deselect();
 
-                         $('#tblPendingUpload').DataTable().rows(':contains("ICS LOW"), :contains("ICS HIGH")').select()
+                                        $('#tblPendingUpload').DataTable().rows(':contains("ICS LOW"), :contains("ICS HIGH")').select()
 
-                    }
-                },
+                                    }
+                                },
                 {
                     text: 'Select none',
                     action: function () {
@@ -2155,131 +2155,129 @@ function populateDataTablePendingUpload(data) {
                 },
                 ]
             }, colReorder: true
-            , stateSave: true
+             , stateSave: true
         });
 
-        
-       var icslow = false;
-       var icshigh = false;
-       var par = false;
 
-       mytable.on('select', function (e, dt, type, indexes) {
+        var icslow = false;
+        var icshigh = false;
+        var par = false;
 
-           icslow = false;
-           icshigh = false;
-           par = false;
+        mytable.on('select', function (e, dt, type, indexes) {
 
-           var count = $('#tblPendingUpload').DataTable().rows({ selected: true }).count();
+            icslow = false;
+            icshigh = false;
+            par = false;
 
-           var data = mytable.rows({ selected: true }).data().toArray();
-           console.log(data);
-           var list = "";
-           var propdisid = [];
-           data.forEach((timex, index) => {
-               list += timex.Paricsword + ",";
-               //propdisid += timex.PropertyDisposalID + ",";
-               propdisid.push(timex.PropertyDisposalID);
-               prodisidstr = propdisid.join(',');
+            var count = $('#tblPendingUpload').DataTable().rows({ selected: true }).count();
+
+            var data = mytable.rows({ selected: true }).data().toArray();
+            console.log(data);
+            var list = "";
+            var propdisid = [];
+            data.forEach((timex, index) => {
+                list += timex.Paricsword + ",";
+                //propdisid += timex.PropertyDisposalID + ",";
+                propdisid.push(timex.PropertyDisposalID);
+                prodisidstr = propdisid.join(',');
 
 
-               //alert(timex.PropertyDisposalID);
+                //alert(timex.PropertyDisposalID);
 
-               if (timex.Paricsword == "ICS HIGH") {
-                   icshigh = true;
-               }
-               else if (timex.Paricsword == "ICS LOW") {
-                   icslow = true;
-               }
-               else if (timex.Paricsword == "PAR") {
-                   par = true;
-               }
-           });
+                if (timex.Paricsword == "ICS HIGH") {
+                    icshigh = true;
+                }
+                else if (timex.Paricsword == "ICS LOW") {
+                    icslow = true;
+                }
+                else if (timex.Paricsword == "PAR") {
+                    par = true;
+                }
+            });
 
-           //alert(list + ' || ICS High: ' + icshigh + ' || ICS Low: ' + icslow + ' || PAR: ' + par);
+            //alert(list + ' || ICS High: ' + icshigh + ' || ICS Low: ' + icslow + ' || PAR: ' + par);
 
-           if (par == true && icshigh == false && icslow == false)
-           {
-               document.getElementById("printGrid1").children[0].style.display = "inline";
-               document.getElementById("printGrid1").children[1].style.display = "none";
-               document.getElementById("printGrid1").children[2].style.display = "none";
-               excelcount = 0;
+            if (par == true && icshigh == false && icslow == false) {
+                document.getElementById("printGrid1").children[0].style.display = "inline";
+                document.getElementById("printGrid1").children[1].style.display = "none";
+                document.getElementById("printGrid1").children[2].style.display = "none";
+                excelcount = 0;
 
-           }
-           else if (par == false && icslow == true && icshigh == false || par == false && icshigh == true && icslow == false || par == false && icshigh == true && icslow == true) {
-               document.getElementById("printGrid1").children[0].style.display = "none";
-               document.getElementById("printGrid1").children[1].style.display = "inline";
-               document.getElementById("printGrid1").children[2].style.display = "none";
-               excelcount = 0;
+            }
+            else if (par == false && icslow == true && icshigh == false || par == false && icshigh == true && icslow == false || par == false && icshigh == true && icslow == true) {
+                document.getElementById("printGrid1").children[0].style.display = "none";
+                document.getElementById("printGrid1").children[1].style.display = "inline";
+                document.getElementById("printGrid1").children[2].style.display = "none";
+                excelcount = 0;
 
-           }
-           else if (par == true && icslow == true && icshigh == false || par == true && icshigh == true && icslow == false || par == true && icshigh == true && icslow == true) {
-               document.getElementById("printGrid1").children[0].style.display = "none";
-               document.getElementById("printGrid1").children[1].style.display = "none";
-               document.getElementById("printGrid1").children[2].style.display = "inline";
-               excelcount = 0;
+            }
+            else if (par == true && icslow == true && icshigh == false || par == true && icshigh == true && icslow == false || par == true && icshigh == true && icslow == true) {
+                document.getElementById("printGrid1").children[0].style.display = "none";
+                document.getElementById("printGrid1").children[1].style.display = "none";
+                document.getElementById("printGrid1").children[2].style.display = "inline";
+                excelcount = 0;
 
-           }
-           else
-           {
-               excelcount = 1;
-           }
-       });
+            }
+            else {
+                excelcount = 1;
+            }
+        });
 
 
 
 
-       mytable.on('deselect', function (e, dt, type, indexes) {
+        mytable.on('deselect', function (e, dt, type, indexes) {
 
-           icslow = false;
-           icshigh = false;
-           par = false;
+            icslow = false;
+            icshigh = false;
+            par = false;
 
-           var data = mytable.rows({ selected: true }).data().toArray();
-           console.log(data);
-           var list = "";
-           var disposalid = "";
-           data.forEach((timex, index) => {
-               list += timex.Paricsword + ",";
-               
+            var data = mytable.rows({ selected: true }).data().toArray();
+            console.log(data);
+            var list = "";
+            var disposalid = "";
+            data.forEach((timex, index) => {
+                list += timex.Paricsword + ",";
 
-               if (timex.Paricsword == "ICS HIGH") {
-                   icshigh = true;
-               }
-               else if (timex.Paricsword == "ICS LOW") {
-                   icslow = true;
-               }
-               else if (timex.Paricsword == "PAR") {
-                   par = true;
-               }
-           });
 
-           //alert(list + ' || ICS High: ' + icshigh + ' || ICS Low: ' + icslow + ' || PAR: ' + par);
+                if (timex.Paricsword == "ICS HIGH") {
+                    icshigh = true;
+                }
+                else if (timex.Paricsword == "ICS LOW") {
+                    icslow = true;
+                }
+                else if (timex.Paricsword == "PAR") {
+                    par = true;
+                }
+            });
 
-           if (par == true && icshigh == false && icslow == false) {
-               document.getElementById("printGrid1").children[0].style.display = "inline";
-               document.getElementById("printGrid1").children[1].style.display = "none";
-               document.getElementById("printGrid1").children[2].style.display = "none";
-               excelcount = 0;
+            //alert(list + ' || ICS High: ' + icshigh + ' || ICS Low: ' + icslow + ' || PAR: ' + par);
 
-           }
-           else if (par == false && icslow == true && icshigh == false || par == false && icshigh == true && icslow == false || par == false && icshigh == true && icslow == true) {
-               document.getElementById("printGrid1").children[0].style.display = "none";
-               document.getElementById("printGrid1").children[1].style.display = "inline";
-               document.getElementById("printGrid1").children[2].style.display = "none";
-               excelcount = 0;
+            if (par == true && icshigh == false && icslow == false) {
+                document.getElementById("printGrid1").children[0].style.display = "inline";
+                document.getElementById("printGrid1").children[1].style.display = "none";
+                document.getElementById("printGrid1").children[2].style.display = "none";
+                excelcount = 0;
 
-           }
-           else if (par == true && icslow == true && icshigh == false || par == true && icshigh == true && icslow == false || par == true && icshigh == true && icslow == true) {
-               document.getElementById("printGrid1").children[0].style.display = "none";
-               document.getElementById("printGrid1").children[1].style.display = "none";
-               document.getElementById("printGrid1").children[2].style.display = "inline";
-               excelcount = 0;
+            }
+            else if (par == false && icslow == true && icshigh == false || par == false && icshigh == true && icslow == false || par == false && icshigh == true && icslow == true) {
+                document.getElementById("printGrid1").children[0].style.display = "none";
+                document.getElementById("printGrid1").children[1].style.display = "inline";
+                document.getElementById("printGrid1").children[2].style.display = "none";
+                excelcount = 0;
 
-           }
-           else {
-               excelcount = 1;
-           }
-       });
+            }
+            else if (par == true && icslow == true && icshigh == false || par == true && icshigh == true && icslow == false || par == true && icshigh == true && icslow == true) {
+                document.getElementById("printGrid1").children[0].style.display = "none";
+                document.getElementById("printGrid1").children[1].style.display = "none";
+                document.getElementById("printGrid1").children[2].style.display = "inline";
+                excelcount = 0;
+
+            }
+            else {
+                excelcount = 1;
+            }
+        });
 
         var ptable = $('#tblPendingUpload').DataTable();
         $('#tblPendingUpload').off('click');
@@ -2359,7 +2357,7 @@ function populateDataTablePendingUpload(data) {
     }
 
 
-    
+
 
     //$('#tblPendingUpload tbody').off('click').on('click', 'tr', function () {
 

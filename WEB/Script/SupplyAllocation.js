@@ -617,7 +617,7 @@ function load_data() {
     $.ajax({
         type: 'POST',
         url: url + "/SupplyAllocation.aspx/GetList",
-        data: "{ site: '" + warehouseid +  "' ,tosite : '" + tosite + "', search: '" + search + "', custodianid: '" + custodian + "'}", 
+        data: "{ site: '" + warehouseid + "' ,tosite : '" + tosite + "', search: '" + search + "', custodianid: '" + custodian + "'}",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
@@ -800,7 +800,7 @@ function GetCount() {
     $.ajax({
         type: "POST",
         url: url + "/SupplyAllocation.aspx/SupplyTransferGetCount",
-        data: "{ fromsite: '" + warehouseid +  "', tosite: '" + towarehouse + "', custodian: '" + custodian + "'} ",
+        data: "{ fromsite: '" + warehouseid + "', tosite: '" + towarehouse + "', custodian: '" + custodian + "'} ",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
@@ -1310,19 +1310,19 @@ function ViewAssets(transactionno, isapproved) {
     //        document.getElementById("printGrid").children[7].style.display = "none";
     //        document.getElementById("printGrid").children[8].style.display = "none";
     //    } else {
-            document.getElementById("printGrid").children[0].style.display = "none";
-            document.getElementById("printGrid").children[1].style.display = "none";
-            document.getElementById("printGrid").children[2].style.display = "none";
-            document.getElementById("printGrid").children[3].style.display = "none";
-            document.getElementById("printGrid").children[4].style.display = "none";
-            document.getElementById("printGrid").children[5].style.display = "none";
-            document.getElementById("printGrid").children[6].style.display = "none";
-            document.getElementById("printGrid").children[7].style.display = "none";
-            document.getElementById("printGrid").children[8].style.display = "none";
-        //}
+    document.getElementById("printGrid").children[0].style.display = "none";
+    document.getElementById("printGrid").children[1].style.display = "none";
+    document.getElementById("printGrid").children[2].style.display = "none";
+    document.getElementById("printGrid").children[3].style.display = "none";
+    document.getElementById("printGrid").children[4].style.display = "none";
+    document.getElementById("printGrid").children[5].style.display = "none";
+    document.getElementById("printGrid").children[6].style.display = "none";
+    document.getElementById("printGrid").children[7].style.display = "none";
+    document.getElementById("printGrid").children[8].style.display = "none";
+    //}
 
-        //gheghe(Certificate/Word)
-        //document.getElementById("printGrid").children[3].style.display = "none";
+    //gheghe(Certificate/Word)
+    //document.getElementById("printGrid").children[3].style.display = "none";
 
     //    $.ajax({
     //        type: "POST",
@@ -1383,21 +1383,21 @@ function ViewAssets(transactionno, isapproved) {
     $('#btndownloadcreatepdf').attr('transno', transactionno);
     var x = document.getElementById("showorhide");
     //if (counter == counterchecker) {
-        if (isapproved == "True") {
-            load_data_PUL1();
-            $('#addToListStock').modal('show');
-            x.style.display = "inline";
-        }
-        else {
-            load_data_PUL1();
-            $('#addToListStock').modal('show');
-            x.style.display = "none";
-        }
+    if (isapproved == "True") {
+        load_data_PUL1();
+        $('#addToListStock').modal('show');
+        x.style.display = "inline";
+    }
+    else {
+        load_data_PUL1();
+        $('#addToListStock').modal('show');
+        x.style.display = "none";
+    }
     //}
     //else {
-        //load_data_PUL1();
-        //$('#ALPendingApproval').modal('show');
-        //x.style.display = "inline";
+    //load_data_PUL1();
+    //$('#ALPendingApproval').modal('show');
+    //x.style.display = "inline";
     //}
 
 }
@@ -1751,59 +1751,59 @@ function UploadStockAllocation() {
     //    swal("", "Select a file to upload.", "warning");
     //}
     //else {
-        swal({
-            title: "Are you sure?",
-            text: "Are you sure you want to complete this transaction?",
-            icon: "warning",
-            reverseButtons: false,
-            buttons: [
-              'No',
-              'Yes'
-            ],
-            dangerMode: true,
-        }).then(function (isConfirm) {
-            if (isConfirm) {
-                $(function () {
-                    var fileUpload = $("#BodyHolder_AFupload").get(0);
-                    var files = fileUpload.files;
-                    var test = new FormData();
-                    for (var i = 0; i < files.length; i++) {
-                        test.append(files[i].name, files[i]);
-                    }
-                    $.ajax({
-                        url: url + "/OperationUploadHandler.ashx?transactionnumber=" + issuanceno + "|StockAllocation",
-                        type: "POST",
-                        contentType: false,
-                        processData: false,
-                        data: test,
-                        success: function (result) {
-                            if (result.includes("File Uploaded Successfully", 0)) {
-                                $.ajax({
-                                    type: "POST",
-                                    url: url + "/SupplyAllocation.aspx/UploadSupplyAllocation",
-                                    data: " { transactionno : '" + issuanceno + "'} ",
-                                    contentType: "application/json; charset=utf-8",
-                                    dataType: "json",
-                                    success: function (msg) {
-                                        load_data_Pendingupload1();
-                                        $('#viewStockAllocationDetails').modal('hide');
-                                        swal("Successful", "Transaction Completed!", "success");
-                                    }
-                                });
-                            } else {
-                                swal("Warning", result, "warning");
-                            }
-                        },
-                        error: function (err) {
-                            swal("Warning", err.statusText, "warning");
+    swal({
+        title: "Are you sure?",
+        text: "Are you sure you want to complete this transaction?",
+        icon: "warning",
+        reverseButtons: false,
+        buttons: [
+          'No',
+          'Yes'
+        ],
+        dangerMode: true,
+    }).then(function (isConfirm) {
+        if (isConfirm) {
+            $(function () {
+                var fileUpload = $("#BodyHolder_AFupload").get(0);
+                var files = fileUpload.files;
+                var test = new FormData();
+                for (var i = 0; i < files.length; i++) {
+                    test.append(files[i].name, files[i]);
+                }
+                $.ajax({
+                    url: url + "/OperationUploadHandler.ashx?transactionnumber=" + issuanceno + "|StockAllocation",
+                    type: "POST",
+                    contentType: false,
+                    processData: false,
+                    data: test,
+                    success: function (result) {
+                        if (result.includes("File Uploaded Successfully", 0)) {
+                            $.ajax({
+                                type: "POST",
+                                url: url + "/SupplyAllocation.aspx/UploadSupplyAllocation",
+                                data: " { transactionno : '" + issuanceno + "'} ",
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (msg) {
+                                    load_data_Pendingupload1();
+                                    $('#viewStockAllocationDetails').modal('hide');
+                                    swal("Successful", "Transaction Completed!", "success");
+                                }
+                            });
+                        } else {
+                            swal("Warning", result, "warning");
                         }
-                    });
+                    },
+                    error: function (err) {
+                        swal("Warning", err.statusText, "warning");
+                    }
                 });
-            } else {
-                swal("Cancelled", "Cancelled by user", "warning");
-            }
-        });
-   // }
+            });
+        } else {
+            swal("Cancelled", "Cancelled by user", "warning");
+        }
+    });
+    // }
 }
 
 

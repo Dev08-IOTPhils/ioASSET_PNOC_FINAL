@@ -3450,7 +3450,7 @@ public partial class Home_RequestManagement : BasePage
             return "";
         }
     }
-    
+
     [WebMethod]
     public static string ApproveStockDisposal1(string disposalno)
     {
@@ -3471,7 +3471,7 @@ public partial class Home_RequestManagement : BasePage
             return "sorry";
         }
     }
-    
+
     [WebMethod]
     public static string DeclineStockDisposal(string disposalno, string remarkS, string transactoremail, string name)
     {
