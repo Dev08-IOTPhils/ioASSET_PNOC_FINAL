@@ -1787,7 +1787,13 @@ function UploadStockAllocation() {
                                 success: function (msg) {
                                     load_data_Pendingupload1();
                                     $('#viewStockAllocationDetails').modal('hide');
-                                    swal("Successful", "Transaction Completed!", "success");
+
+                                    if (msg.d == 'Success') {
+                                        swal("Successful", "Transaction Completed!", "success");
+                                    }
+                                    else {
+                                        swal("Warning", "Insufficient Supply: " + "\n " + msg.d, "warning");
+                                    }
                                 }
                             });
                         } else {
