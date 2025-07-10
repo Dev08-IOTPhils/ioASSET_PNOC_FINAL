@@ -787,7 +787,7 @@ function RequestStockAsset() {
     var custodianid = $('#BodyHolder_ddlCustodian').val();
 
     if (isSufficient == false) {
-        swal("Warning", "Insuficient Supply", "warning");
+        swal("Warning", "Insufficient Supply", "warning");
     }
     else {
         if (requestquantity == "") {

@@ -39,6 +39,20 @@ public partial class Custodian_Operation_Module_SupplyAllocation : BasePage
     public static string EditAccess = "";
     public static string DeleteAccess = "";
 
+    //Added by: Domdom
+    [WebMethod]
+    public static string checkQuantity(string itemCode)
+    {
+        StockRequestBll y = new StockRequestBll();
+        StockEntity x = new StockEntity();
+
+        x.ItemCode = itemCode;
+        x.CreatedBy = Common.UserName;
+        x.ConnectionString = Common.ConnString;
+
+        return y.checkQuantity(x);
+    }
+
     public void CheckAccess()
     {
         RoleBll rb = new RoleBll();
@@ -425,6 +439,7 @@ public partial class Custodian_Operation_Module_SupplyAllocation : BasePage
                 {
                     StockEntity x = new StockEntity();
                     x.StockAllocationNo = dt.Rows[i]["StockAllocationNo"].ToString();
+                    x.ItemCode = dt.Rows[i]["ItemCode"].ToString();
                     x.Description = dt.Rows[i]["Description"].ToString();
                     x.ItemCode = dt.Rows[i]["ItemCode"].ToString();
                     x.FromSiteStr = dt.Rows[i]["FromSiteID"].ToString();

@@ -110,7 +110,7 @@
                         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
                             <select id="ddlCustodian" class="form-control select2" data-dropdown-css-class="select2-primary" style="width: 100%; height: 35px"></select>
                         </div>
-<%--                        <div class="col-lg-1 col-md-12 col-sm-12 col-xs-12">
+                        <%--                        <div class="col-lg-1 col-md-12 col-sm-12 col-xs-12">
                             <div class="input-group margin">
                                 <label class="control-label" align="left">
                                     Type:
@@ -124,7 +124,7 @@
                                 <asp:ListItem Text="Location" Value="2" />
                             </asp:DropDownList>
                         </div>--%>
-<%--                        <div id="showorHide" style="display: none">
+                        <%--                        <div id="showorHide" style="display: none">
                             <div class="col-lg-1 col-md-12 col-sm-12 col-xs-12">
                                 <label class="select2-primary" align="left">
                                     Property Type Cost:
@@ -138,7 +138,7 @@
                 </div>
             </div>
         </div>
-<%--        <br />
+        <%--        <br />
         <div class="row">
             <div class="col-lg-12">
                 <center><p style="font-size:12px;"><i>
@@ -168,7 +168,7 @@
                             </div>
                         </div>
 
-<%--                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                        <%--                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
                             <label class="control-label" align="left">
                                 <asp:Label ID="lblDisplayFromLoc" runat="server" Text="Label"></asp:Label>
                             </label>
@@ -180,7 +180,7 @@
                             </div>
                         </div>--%>
 
-<%--                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                        <%--                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
                             <label class="control-label" align="left">
                                 <asp:Label ID="lblDisplayFromArea" runat="server" Text="Label"></asp:Label>
                             </label>
@@ -192,7 +192,7 @@
                             </div>
                         </div>--%>
                     </div>
-<%--                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="sourcePerson" style="display: block">
+                    <%--                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="sourcePerson" style="display: block">
                         <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
                             <label class="control-label">
                                 From Site/Department:
@@ -230,7 +230,7 @@
                             </div>
                         </div>
 
-<%--                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                        <%--                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
                             <label class="control-label" align="left">
                                 <asp:Label ID="lblDisplayToLoc" runat="server" Text="Label"></asp:Label>
                             </label>
@@ -254,7 +254,7 @@
                             </div>
                         </div>--%>
                     </div>
-<%--                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="DestinationPerson" style="display: block">
+                    <%--                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="DestinationPerson" style="display: block">
                         <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
                             <label class="control-label">
                                 To Site/Department:
@@ -340,7 +340,7 @@
                                 <td>REMARKS</td>
                                 <td>ORIGIN</td>
                                 <td>DESTINATION</td>
-                                 <td>CREATED BY</td>
+                                <td>CREATED BY</td>
                                 <td>TRANSACTION DATE</td>
                                 <td>STATUS</td>
                                 <td>ACTION</td>
@@ -410,7 +410,7 @@
                                         <td>DESCRIPTION</td>
                                         <td>QUANTITY</td>
                                         <td>UNIT</td>
-<%--                                        <td>SITE/DEPARTMENT</td>--%>
+                                        <%--                                        <td>SITE/DEPARTMENT</td>--%>
                                         <td>CLASSIFICATION</td>
                                         <td>CUSTODIAN TYPE</td>
                                         <td>ACTION</td>
@@ -573,8 +573,8 @@
         </div>
     </div>
 
-<%--    added by: Domdom--%>
-        <div id="addToListStock" class="modal fade" tabindex="-1" role="dialog">
+    <%--    added by: Domdom--%>
+    <div id="addToListStock" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-med">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: steelblue; text-align: center;">
@@ -599,8 +599,20 @@
                             Quantity:
                         </div>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
-                            <input id="txtIssueQuantity" type="text" style="width: 100%" class="form-control" onkeypress="return onlyNos(event,this)" />
+                            <input id="txtIssueQuantity" type="text" style="width: 100%" class="form-control" onkeyup=" checkQuantity()" onkeypress="return onlyNos(event,this)" />
                         </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <label class="control-label" id="divInsuficientStock" style="color: red;">
+                                <h5>(Insufficient Supply)</h5>
+                            </label>
+
+                        </div>
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -664,7 +676,8 @@
                                 <thead style="font-weight: bold">
                                     <tr>
                                         <td>ALLOCATION #</td>
-                                        <td>REMARKS</td>
+                                        <td>ITEM CODE</td>
+                                        <td>DESCRIPTION</td>
                                         <td>ORIGIN</td>
                                         <td>DESTINATION</td>
                                         <td>STATUS</td>
@@ -677,8 +690,8 @@
                         </div>
                         &nbsp;
                         <div class="col-lg-12" id="showorhide1">
-                        <button type="button" class="btn btn-sm btn-primary pull-right" id="btnComplete1" onclick="UploadStockAllocation()">&nbsp;&nbsp;Complete Transaction&nbsp;&nbsp;</button>
-                        <asp:FileUpload ID="FileUpload1" class="btn btn-sm btn-primary pull-right" AllowMultiple="true" runat="server" Style="width: 30%;" />
+                            <button type="button" class="btn btn-sm btn-primary pull-right" id="btnComplete1" onclick="UploadStockAllocation()">&nbsp;&nbsp;Complete Transaction&nbsp;&nbsp;</button>
+                            <asp:FileUpload ID="FileUpload1" class="btn btn-sm btn-primary pull-right" AllowMultiple="true" runat="server" Style="width: 30%;" />
                         </div>
                     </div>
 

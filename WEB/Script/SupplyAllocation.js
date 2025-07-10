@@ -9,6 +9,8 @@ $(document).ready(function () {
     GetsitePT();
     GetsiteToPT();
     GetEmployeePT();
+    $("#divInsuficientStock").hide();
+
     $('#BodyHolder_btnComplete').fadeIn();
 
     $('#itrapprovedsignatureupload').off('change').on('change', function () {
@@ -715,6 +717,8 @@ function populateDataTable(data) {
             e.preventDefault();
             var currentRow = $(this).closest("tr");
             var itemcode = currentRow.find("td:eq(0)").text();
+            code = itemcode;
+
             var balancequantity = currentRow.find("td:eq(2)").text();
             var smlid = $(this).attr('smlid');
 
@@ -2168,6 +2172,7 @@ function populateDataSDLDetails(data) {
             "data": JSON.parse(data.d),
             "columns": [
                 { "data": "StockAllocationNo" },
+                { "data": "ItemCode" },
                 { "data": "Remarks" },
                 { "data": "FromSiteStr" },
                 { "data": "ToSiteStr" },
@@ -2220,4 +2225,31 @@ function populateDataSDLDetails(data) {
             .clear()
             .draw();
     }
+}
+
+//Added by: Domdom
+var code = "";
+function checkQuantity() {
+    //alert(code + 'CODE');
+    var qty = $('#txtIssueQuantity').val();
+
+    $.ajax({
+        type: "POST",
+        url: url + "/SupplyAllocation.aspx/checkQuantity",
+        data: "{itemCode: '" + code + "'}",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (msg) {
+            //alert(msg.d + 'msg.d'); 
+
+            if (parseInt(msg.d) < parseInt(qty)) {
+                $("#divInsuficientStock").show();
+                isSufficient = false;
+            }
+            else {
+                $("#divInsuficientStock").hide();
+                isSufficient = true;
+            }
+        }
+    });
 }

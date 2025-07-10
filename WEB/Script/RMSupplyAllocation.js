@@ -165,6 +165,7 @@ function populateDataSDLDetails(data) {
             "data": JSON.parse(data.d),
             "columns": [
                 { "data": "StockAllocationNo" },
+                { "data": "ItemCode" },
                 { "data": "Remarks" },
                 { "data": "FromSiteStr" },
                 { "data": "ToSiteStr" },

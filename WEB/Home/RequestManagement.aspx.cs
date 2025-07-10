@@ -3819,6 +3819,7 @@ public partial class Home_RequestManagement : BasePage
                 {
                     StockEntity x = new StockEntity();
                     x.StockAllocationNo = dt.Rows[i]["StockAllocationNo"].ToString();
+                    x.ItemCode = dt.Rows[i]["ItemCode"].ToString();
                     x.Remarks = dt.Rows[i]["Description"].ToString();
                     x.FromSiteStr = dt.Rows[i]["FromSiteName"].ToString();
                     x.ToSiteStr = dt.Rows[i]["ToSiteName"].ToString();

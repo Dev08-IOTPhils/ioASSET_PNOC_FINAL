@@ -1819,7 +1819,8 @@
                                 <thead style="font-weight: bold">
                                     <tr>
                                         <td>ALLOCATION #</td>
-                                        <td>REMARKS</td>
+                                        <td>ITEM CODE</td>
+                                        <td>DESCRIPTION</td>
                                         <td>ORIGIN</td>
                                         <td>DESTINATION</td>
                                         <td>STATUS</td>
