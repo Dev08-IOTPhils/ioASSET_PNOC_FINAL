@@ -1743,7 +1743,6 @@ function UploadStockAllocation() {
     var filess = $('#BodyHolder_FileUpload1').val();
     var filename = "";
 
-    //alert(issuanceno);
     if (filess == "") {
         filename = "";
     }
@@ -1809,7 +1808,7 @@ function UploadStockAllocation() {
             swal("Cancelled", "Cancelled by user", "warning");
         }
     });
-    // }
+
 }
 
 
