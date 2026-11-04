@@ -46,7 +46,7 @@
 <%--                                <td>GROUP</td>
                                 <td>DEPARTMENT</td>--%>
                                 <td>DESCRIPTION</td>
-                                <td>ACTIVEssssssssssssssssssssss</td>
+                                <td>ACTIVE</td>
                                 <td>ACTION</td>
                             </tr>
                         </thead>
